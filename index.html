@@ -3,1151 +3,932 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>고객사 등록 가이드</title>
+  <title>온보딩 가이드</title>
 
   <style>
-    :root {
-      --bg: #F3F4F6;
-      --card: #FFFFFF;
-      --text: #111827;
-      --muted: #6B7280;
-      --line: #E5E7EB;
-      --poomgo: #0040D1;
-      --poomgo-weak: rgba(0, 64, 209, 0.06);
-      --danger: #DC2626;
-      --danger-weak: #FFF5F5;
-      --radius: 24px;
-      --content-max: 800px;
-    }
-
-    * {
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body {
-      margin: 0;
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .wrap {
-      padding: 60px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 10px;
-      max-width: var(--content-max);
-    }
-
-    .header h1 {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 0 0 12px;
-      letter-spacing: -0.5px;
-    }
-
-    .header p {
-      color: var(--muted);
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .alert-card {
-      width: 100%;
-      max-width: var(--content-max);
-      background: var(--danger-weak);
-      border: 1.5px solid #FECACA;
-      border-radius: var(--radius);
-      padding: 24px;
-    }
+    :root{
+      --bg:#F6F7FB;
+      --card:#FFFFFF;
+      --text:#111827;
+      --muted:#6B7280;
+      --line:#E5E7EB;
 
-    .alert-card h3 {
-      color: #111827;
-      margin: 0 0 12px;
-      font-size: 18px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .alert-list {
-      margin: 0;
-      padding-left: 20px;
-      font-size: 15px;
-      color: #374151;
-      font-weight: 600;
-    }
+      --poomgo:#0040D1;
+      --poomgo-weak:rgba(0,64,209,.08);
 
-    .alert-list li {
-      margin-bottom: 8px;
-    }
+      --ok:#16A34A;
+      --ok-weak:#ECFDF5;
+      --ok-border:#BBF7D0;
 
-    .alert-list b {
-      font-weight: 800;
-    }
+      --warn:#D97706;
+      --warn-weak:#FFF7ED;
+      --warn-border:#FED7AA;
 
-    .step-card {
-      width: 100%;
-      max-width: var(--content-max);
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
+      --danger:#DC2626;
+      --danger-weak:#FEF2F2;
+      --danger-border:#FECACA;
 
-    .step-head {
-      padding: 24px 30px;
-      border-bottom: 1px solid #F3F4F6;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      --shadow:0 10px 28px rgba(17,24,39,.08);
+      --shadow2:0 18px 40px rgba(17,24,39,.12);
+      --radius:22px;
     }
 
-    .step-badge {
-      background: #F3F4F6;
-      color: #4B5563;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
+    *{ box-sizing:border-box; }
 
-    .step-badge.optional {
-      background: #111827;
-      color: #fff;
+    body{
+      margin:0;
+      font-family:Pretendard, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
     }
 
-    .step-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin: 0;
-      letter-spacing: -0.3px;
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 18px 56px;
     }
 
-    .step-body {
-      padding: 30px;
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
     }
 
-    .desc-box {
-      background: #F9FAF7;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
+    .title{
+      margin:0;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-.03em;
     }
 
-    .desc-text {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 600;
-      color: #374151;
-      line-height: 1.8;
+    .sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:700;
+      line-height:1.55;
     }
 
-    .desc-text b {
-      color: var(--poomgo);
-      font-weight: 800;
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:#374151;
+      font-size:13px;
+      font-weight:800;
     }
 
-    .em-danger {
-      color: var(--danger);
-      font-weight: 800;
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
     }
 
-    .em-naver {
-      color: #03C75A !important;
-      font-weight: 800;
+    .progressCard{
+      padding:18px;
+      margin-bottom:14px;
     }
 
-    .em-poomgo {
-      color: var(--poomgo);
-      font-weight: 800;
+    .progressHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
     }
 
-    .email-text {
-      color: #6B7280 !important;
-      font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 4px;
+    .progressTitle{
+      margin:0;
+      font-size:15px;
+      font-weight:900;
     }
 
-    .badge-inline {
-      display: inline-block;
-      background-color: var(--poomgo);
-      color: #fff !important;
-      padding: 2px 10px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 800;
-      margin: 0 4px;
-      vertical-align: middle;
-      line-height: 1.4;
+    .progressMeta{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
     }
 
-    .img-container {
-      position: relative;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      overflow: hidden;
-      cursor: zoom-in;
-      background: #fff;
+    .bar{
+      width:100%;
+      height:12px;
+      border-radius:999px;
+      background:#E5E7EB;
+      overflow:hidden;
     }
 
-    .img-container img {
-      width: 100%;
-      display: block;
+    .barFill{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg, #0040D1, #2F6BFF);
+      transition:width .25s ease;
     }
 
-    .img-hint {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      background: rgba(17, 24, 39, 0.6);
-      backdrop-filter: blur(4px);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 20px;
+    .notice{
+      padding:16px;
+      margin-bottom:14px;
+      border:1px solid var(--warn-border);
+      background:var(--warn-weak);
+    }
+
+    .noticeTitle{
+      margin:0 0 6px;
+      color:#9A3412;
+      font-size:15px;
+      font-weight:900;
     }
 
-    .info-grid {
-      display: grid;
-      gap: 20px;
+    .noticeDesc{
+      margin:0;
+      color:#B45309;
+      font-size:13px;
+      font-weight:700;
+      line-height:1.55;
     }
 
-    .info-group {
-      background: #F8FAFC;
-      padding: 18px;
-      border-radius: 12px;
+    .steps{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
 
-    .group-label {
-      display: block;
-      font-weight: 800;
-      font-size: 14px;
-      color: var(--poomgo);
-      margin-bottom: 10px;
+    .step{
+      padding:16px;
     }
 
-    .btn-wrap {
-      text-align: center;
-      margin-top: 10px;
+    .stepHeader{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
-    .btn-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--poomgo);
-      color: #fff !important;
-      text-decoration: none;
-      padding: 16px 32px;
-      border-radius: 14px;
-      font-weight: 800;
-      font-size: 17px;
-      transition: 0.2s;
-      border: 0;
-      cursor: pointer;
+    .leftHead{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      min-width:0;
+      flex:1 1 auto;
     }
 
-    .btn-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 64, 209, 0.25);
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:72px;
+      height:30px;
+      padding:0 12px;
+      border-radius:999px;
+      background:var(--poomgo-weak);
+      color:var(--poomgo);
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+      line-height:1;
     }
 
-    .route-badge {
-      display: inline-block;
-      background: #F1F5F9;
-      color: #475569;
-      padding: 4px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 800;
-      border: 1px solid #E2E8F0;
+    .badge.completed{
+      background:var(--ok-weak);
+      color:var(--ok);
     }
 
-    .route-step {
-      color: #475569;
-      font-weight: 700;
+    .stepTitle{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-.02em;
+      line-height:1.35;
     }
 
-    .route-sep {
-      color: #CBD5E1;
-      margin: 0 6px;
-      font-weight: 400;
+    .stepCode{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
     }
 
-    .route-active {
-      color: var(--poomgo);
-      font-weight: 800;
+    .actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
 
-    .notice-box {
-      margin-top: 16px;
-      padding: 16px;
-      background: #FFFBEB;
-      border-left: 4px solid #F59E0B;
-      border-radius: 8px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:900;
+      line-height:1;
+      cursor:pointer;
+      text-decoration:none;
+      white-space:nowrap;
     }
 
-    .notice-title {
-      display: block;
-      font-size: 14px;
-      font-weight: 800;
-      color: #92400E;
-      margin-bottom: 6px;
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 18px rgba(17,24,39,.08);
     }
 
-    .notice-content {
-      font-size: 14px;
-      font-weight: 600;
-      color: #B45309;
-      margin: 0;
+    .btn.primary{
+      background:var(--poomgo);
+      border-color:transparent;
+      color:#fff;
     }
 
-    .img-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+    .btn.done{
+      background:var(--ok);
+      border-color:transparent;
+      color:#fff;
     }
 
-    .img-modal.show {
-      display: flex;
+    .stepBody{
+      margin-top:14px;
+      display:block;
     }
 
-    .img-modal img {
-      max-width: 100%;
-      max-height: 90vh;
-      border-radius: 8px;
-      cursor: zoom-out;
+    .collapsed .stepBody{
+      display:none;
     }
 
-    .form-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
+    .collapsed .stepHeader{
+      margin-bottom:0;
     }
 
-    .form-card {
-      background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 6px;
-      overflow: hidden;
-      margin: 12px 0;
+    .step.isLocked .stepBody{
+      display:none;
     }
 
-    .form-card .card-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 16px;
-      border-bottom: 1px solid #E5E7EB;
-      background: #fff;
-      flex-wrap: wrap;
+    .step.isLocked .actions .btn{
+      opacity:.45;
+      pointer-events:none;
     }
 
-    .head-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    .lockHint{
+      display:none;
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#F9FAFB;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      line-height:1.55;
     }
 
-    .card-title {
-      font-weight: 800;
-      color: #111827;
-      font-size: 14px;
+    .step.isLocked .lockHint{
+      display:block;
     }
 
-    .badges {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
+    .blocks{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      height: 20px;
-      padding: 0 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
+    .block{
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .badge.req {
-      background: #F97316;
-      color: #fff;
+    .blockHead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background:#FAFAFB;
     }
 
-    .badge.blue {
-      background: #2563EB;
-      color: #fff;
+    .blockTitle{
+      margin:0;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.45;
     }
 
-    .head-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #6B7280;
-      font-size: 13px;
+    .path{
+      margin-top:8px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 14px;
+      background:var(--poomgo-weak);
+      border-left:5px solid var(--poomgo);
     }
 
-    .checkbox-like {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      border: 1px solid #E5E7EB;
-      border-radius: 6px;
-      background: #fff;
-      font-size: 12px;
-      color: #374151;
+    .pathBadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:52px;
+      height:30px;
+      padding:0 10px;
+      border-radius:10px;
+      background:#fff;
+      border:1px solid rgba(0,64,209,.18);
+      color:var(--poomgo);
+      font-size:12px;
+      font-weight:900;
+      flex:0 0 auto;
     }
 
-    .checkbox-like .box {
-      width: 14px;
-      height: 14px;
-      border: 1px solid #D1D5DB;
-      border-radius: 3px;
-      background: #fff;
+    .pathText{
+      color:#1F2937;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.55;
+      word-break:break-word;
     }
 
-    .form-body {
-      background: #fff;
+    .desc{
+      padding:14px;
+      font-size:14px;
+      font-weight:800;
+      color:#1F2937;
+      line-height:1.7;
+      white-space:pre-line;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 10px 16px;
-      border-bottom: 1px solid #EEF2F7;
+    .highlight{
+      margin:0 14px 14px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--danger-border);
+      background:var(--danger-weak);
+      color:#991B1B;
+      font-size:13px;
+      font-weight:900;
+      line-height:1.55;
     }
 
-    .form-row:last-child {
-      border-bottom: none;
+    .imgWrap{
+      padding:14px;
+      background:#fff;
     }
 
-    .form-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: #111827;
-      font-weight: 700;
-      flex-wrap: wrap;
+    .imgWrap img{
+      width:100%;
+      display:block;
+      border-radius:14px;
+      border:1px solid var(--line);
+      cursor:zoom-in;
     }
 
-    .req-dot {
-      color: #F97316;
-      font-weight: 900;
-      margin-left: 2px;
+    .imgHint{
+      margin:8px 0 0;
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
     }
 
-    .help {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      border: 1px solid #D1D5DB;
-      color: #9CA3AF;
-      font-size: 11px;
-      font-weight: 800;
+    .buttonArea{
+      padding:0 14px 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
     }
 
-    .form-field {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    .checklist{
+      padding:14px;
     }
 
-    .fake-input {
-      height: 34px;
-      min-width: 280px;
-      padding: 0 12px;
-      border: 1px solid #E5E7EB;
-      border-radius: 4px;
-      background: #fff;
-      color: #9CA3AF;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
+    .checklist ul{
+      margin:0;
+      padding-left:20px;
     }
 
-    .fake-input.w-sm { min-width: 120px; }
-    .fake-input.w-md { min-width: 220px; }
-    .fake-input.w-lg { min-width: 420px; }
-
-    .highlight-red {
-      color: #DC2626;
-      font-weight: 700;
+    .checklist li{
+      margin-bottom:8px;
+      color:#1F2937;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.6;
     }
 
-    .fake-btn {
-      height: 34px;
-      padding: 0 12px;
-      border: 1px solid #E5E7EB;
-      background: #fff;
-      border-radius: 4px;
-      font-size: 13px;
-      color: #111827;
-      font-weight: 700;
+    .finalMsg{
+      display:none;
+      margin-top:14px;
+      padding:18px;
+      border:1px solid var(--ok-border);
+      background:var(--ok-weak);
     }
 
-    .inline-note {
-      font-size: 13px;
-      color: #DC2626;
-      font-weight: 700;
+    .finalMsg p{
+      margin:0;
+      color:#166534;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.6;
     }
 
-    .warn-line {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 16px 14px;
-      color: #6B7280;
-      font-size: 13px;
+    .empty{
+      padding:18px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+      text-align:center;
     }
 
-    .warn-ico {
-      color: #F59E0B;
-      font-weight: 900;
+    .modalBack{
+      position:fixed;
+      inset:0;
+      background:rgba(17,24,39,.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:50;
     }
 
-    .submit-guide {
-      font-size: 13px;
-      color: #6B7280;
+    .modal{
+      width:min(1280px, 98vw);
+      max-height:94vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:22px;
+      box-shadow:var(--shadow2);
+      border:1px solid rgba(255,255,255,.25);
     }
 
-    .submit-badge {
-      display: inline-block;
-      padding: 3px 10px;
-      background: #2563EB;
-      color: #fff;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      margin: 0 4px;
+    .modalHead{
+      position:sticky;
+      top:0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:14px 16px;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      z-index:2;
     }
 
-    .notice-box-inline {
-      margin: 12px 16px;
-      padding: 12px 14px;
-      background: #EEF3FF;
-      border: 1px solid #0040D1;
-      border-radius: 6px;
-      color: #0040D1;
-      font-size: 13px;
-      font-weight: 700;
+    .modalTitle{
+      margin:0;
+      font-size:14px;
+      font-weight:900;
     }
 
-    .next-guide-box {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
+    .modalBody{
+      padding:16px;
     }
 
-    .next-guide-box input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #0040D1;
+    .zoomImg{
+      width:100%;
+      display:block;
+      border-radius:16px;
+      border:1px solid var(--line);
     }
-
-    @media (max-width: 600px) {
-      .header h1 {
-        font-size: 26px;
-      }
-
-      .step-head {
-        padding: 20px;
-      }
-
-      .step-body {
-        padding: 20px;
-      }
-
-      .step-title {
-        font-size: 18px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
 
-      .fake-input,
-      .fake-input.w-sm,
-      .fake-input.w-md,
-      .fake-input.w-lg {
-        min-width: 100%;
-      }
+    @media (max-width: 640px){
+      .title{ font-size:22px; }
+      .stepTitle{ font-size:16px; }
+      .path{ flex-direction:column; }
+      .badge{ min-width:auto; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-
-    <header class="header">
-      <h1 id="appTitle"></h1>
-      <p id="subtitle"></p>
-    </header>
-
-    <div class="alert-card">
-      <h3>⚠️ <span id="alertTitle"></span></h3>
-      <ul class="alert-list" id="alertList"></ul>
+    <div class="top">
+      <div>
+        <h1 class="title" id="pageTitle">온보딩 가이드</h1>
+        <p class="sub" id="pageSubtitle">데이터를 불러오는 중입니다.</p>
+      </div>
+      <div class="chip" id="clientChip">고객사 확인 중</div>
     </div>
 
-    <section class="step-card">
-      <div class="step-head">
-        <span class="step-badge">Step 1</span>
-        <h2 class="step-title">고객사 등록 메일 수신</h2>
+    <div class="card progressCard">
+      <div class="progressHead">
+        <p class="progressTitle">진행률</p>
+        <div class="progressMeta" id="progressMeta">0 / 0 단계 완료</div>
       </div>
-      <div class="step-body">
-        <div class="desc-box">
-          <p class="desc-text">
-            수신된 메일에서 <span class="badge-inline">고객사 등록하기</span> 버튼을 클릭합니다.<br>
-            메일 수신 후 <span class="em-danger">24시간 이내</span> 등록이 완료되어야 합니다.
-          </p>
-        </div>
-        <div class="img-container">
-          <img id="step1Img" class="zoomable" src="" data-zoom-src="" alt="Step 1 이미지">
-          <div class="img-hint">클릭해서 확대</div>
-        </div>
+      <div class="bar">
+        <div class="barFill" id="barFill"></div>
       </div>
-    </section>
+    </div>
 
-    <section class="step-card">
-      <div class="step-head">
-        <span class="step-badge">Step 2</span>
-        <h2 class="step-title">고객사 정보 입력</h2>
-      </div>
-      <div class="step-body">
-        <div class="info-grid">
-          <div class="info-group">
-            <span class="group-label">사업자 및 브랜드 정보</span>
+    <div class="card notice">
+      <p class="noticeTitle">안내</p>
+      <p class="noticeDesc">
+        각 단계를 확인한 뒤 <b>완료</b> 버튼을 눌러 다음 단계로 이동해주세요.
+        새로고침해도 진행 상태는 이 브라우저에 저장됩니다.
+      </p>
+    </div>
 
-            <div class="form-wrap">
-              <div class="form-card">
-                <div class="card-head">
-                  <div class="head-left">
-                    <div class="card-title">기본 정보</div>
-                    <div class="badges">
-                      <span class="badge req">필수</span>
-                    </div>
-                  </div>
-                </div>
+    <div class="steps" id="stepsContainer">
+      <div class="card empty">가이드를 불러오는 중입니다.</div>
+    </div>
 
-                <div class="form-body">
-                  <div class="form-row">
-                    <div class="form-label">고객사<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">브랜드명을 입력하세요.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-card">
-                <div class="card-head">
-                  <div class="head-left">
-                    <div class="card-title">사업자 정보</div>
-                    <span class="help">?</span>
-                    <div class="badges">
-                      <span class="badge req">필수</span>
-                      <span class="badge blue">국외 출고 필수</span>
-                    </div>
-                  </div>
-                  <div class="notice-box-inline">
-                    ⚠ 사업자 정보는 이미지에 표기된 정보와 동일하게 입력해주셔야 합니다.
-                  </div>
-                </div>
-
-                <div class="form-body">
-                  <div class="form-row">
-                    <div class="form-label">사업자명<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">네이버</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">업태 및 업종<span class="req-dot">*</span> <span class="help">?</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-sm highlight-red">-</div>
-                      <div class="fake-input w-sm highlight-red">-</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">대표자명<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">최수연</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">사업자 등록 번호<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-sm highlight-red">220</div>
-                      <div>-</div>
-                      <div class="fake-input w-sm highlight-red">81</div>
-                      <div>-</div>
-                      <div class="fake-input w-sm highlight-red">62517</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">주소<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-sm highlight-red">13561</div>
-                      <div class="fake-input w-md highlight-red">경기 성남시 분당구 정자일로 95</div>
-                      <button type="button" class="fake-btn">우편번호 찾기</button>
-                      <div class="fake-input w-md">.</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">세금계산서 담당자명<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">네이버</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">세금계산서 발급 이메일<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">poomgo@dohands.com</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">통관 고유 부호<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">미입력</div>
-                      <button type="button" class="fake-btn">고유부호 발급 및 확인</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-card">
-                <div class="card-head">
-                  <div class="head-left">
-                    <div class="card-title">브랜드 정보</div>
-                    <span class="help">?</span>
-                    <div class="badges">
-                      <span class="badge req">필수</span>
-                      <span class="badge blue">국외 출고 필수</span>
-                    </div>
-                  </div>
-
-                  <div class="head-right">
-                    <div class="checkbox-like">
-                      <span class="box"></span>
-                      사업자정보와 동일
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-body">
-                  <div class="form-row">
-                    <div class="form-label">브랜드명<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">고객사명과 동일하게 입력해주세요.</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">대표 전화번호<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">대표 CS번호를 입력하세요</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">주소<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-sm highlight-red">우편번호</div>
-                      <div class="fake-input w-md highlight-red">브랜드 주소를 입력해주세요.</div>
-                      <button type="button" class="fake-btn">우편번호 찾기</button>
-                      <div class="fake-input w-md">상세주소</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-card">
-                <div class="card-head">
-                  <div class="head-left">
-                    <div class="card-title">지정 반품 정보</div>
-                    <div class="badges">
-                      <span class="badge req">필수</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-body">
-                  <div class="form-row">
-                    <div class="form-label">수화인명</div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">브랜드명을 입력해주세요.</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">주소<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-sm">우편번호</div>
-                      <div class="fake-input w-md highlight-red">반품 수거지 주소를 입력해주세요.</div>
-                      <button type="button" class="fake-btn">우편번호 찾기</button>
-                      <div class="fake-input w-md">상세주소</div>
-                    </div>
-                  </div>
-
-                  <div class="warn-line">
-                    <div class="warn-ico">⚠</div>
-                    <div>지금 입력한 주소로 반품 받고 싶다면 회수할 때 배송 계약에서 ‘지정 반품’을 선택하세요</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-card">
-                <div class="card-head">
-                  <div class="head-left">
-                    <div class="card-title">사용자 정보</div>
-                    <div class="badges">
-                      <span class="badge req">필수</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-body">
-                  <div class="form-row">
-                    <div class="form-label">사용자명<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">현재 등록중인 담당자명을 입력해주세요.</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">전화번호<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">유선 소통이 가능한 휴대폰 번호를 입력해주세요.</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">이메일<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-md highlight-red">현재 등록중인 담당자 메일로 자동 세팅됩니다.</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">비밀번호<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-lg highlight-red">품고 나우 로그인 시 사용할 비밀번호를 설정합니다.</div>
-                      <div class="inline-note">※ 알파벳 대문자, 소문자, 특수문자, 숫자를 모두 포함 8자 이상</div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-label">비밀번호 확인<span class="req-dot">*</span></div>
-                    <div class="form-field">
-                      <div class="fake-input w-lg">동일하게 한번 더 입력</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-card">
-                <div class="form-body">
-                  <div class="form-row">
-                    <div class="form-label">
-                      서비스 이용약관 동의<span class="req-dot">*</span>
-                    </div>
-
-                    <div class="form-field" style="flex-direction:column; align-items:flex-start; gap:8px;">
-                      <label style="display:flex; align-items:center; gap:8px; font-size:13px;">
-                        <input type="checkbox" />
-                        서비스 이용약관에 동의합니다.
-                      </label>
-
-                      <div class="submit-guide">
-                        서비스 이용약관에 동의합니다를 체크 후
-                        상단 <span class="submit-badge">등록완료</span> 버튼을 클릭해주세요.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="step-card">
-      <div class="step-head">
-        <span class="step-badge">Step 3</span>
-        <h2 class="step-title">품고 나우 로그인 확인</h2>
-      </div>
-      <div class="step-body" style="text-align: center;">
-        <p class="desc-text" style="margin-bottom: 24px;">
-          등록한 계정으로 정상 로그인이 되는지 확인합니다.<br>
-          문제가 있을 경우 <span class="email-text">gamgok@dohands.com</span>으로 문의 해주세요.
-        </p>
-
-        <div class="img-container" style="margin-bottom: 24px;">
-          <img id="step3Img" class="zoomable" src="" data-zoom-src="" alt="Step 3 이미지">
-          <div class="img-hint">클릭해서 확대</div>
-        </div>
-
-        <div class="btn-wrap">
-          <a href="https://seller.poomgo.com" class="btn-link" target="_blank" rel="noopener noreferrer">
-            품고 나우 바로가기
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="step-card">
-      <div class="step-head">
-        <span class="step-badge optional">선택</span>
-        <h2 class="step-title">구성원 추가 안내</h2>
-      </div>
-      <div class="step-body">
-        <p class="desc-text" style="margin-bottom: 16px;">
-          품고 나우 접속이 필요한 팀원이 있는 경우 구성원을 추가해주세요.
-        </p>
-
-        <div class="desc-box" style="margin-bottom: 0;">
-          <span class="route-badge">경로</span>
-          <span class="route-step">품고 나우</span>
-          <span class="route-sep">></span>
-          <span class="route-step">등록</span>
-          <span class="route-sep">></span>
-          <span class="route-active">+ 구성원 추가 클릭</span>
-          <span class="route-sep">></span>
-          <span class="route-step">이름, 이메일, 전화번호 입력</span>
-          <span class="route-sep">></span>
-          <span class="badge-inline">구성원 추가</span> <b>클릭</b>
-        </div>
-
-        <div class="notice-box">
-          <strong class="notice-title">💡TIP</strong>
-          <p class="notice-content">
-            구성원 등록 시 이메일 중복 확인이 진행되어야만 추가가 가능합니다.<br>
-            초대받은 구성원이 비밀번호 설정 시간을 초과한 경우<br>
-            품고 나우 접속 후 비밀번호 찾기를 통해 메일을 재수신하여 접속할 수 있습니다.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="step-card">
-      <div class="step-head">
-        <span class="step-badge">Next</span>
-        <h2 class="step-title">다음 단계 안내</h2>
-      </div>
-      <div class="step-body">
-        <div class="desc-box" style="margin-bottom:16px;">
-          <p class="desc-text" style="margin:0;">
-            고객사 등록이 완료되었다면 아래 체크 후
-            <b>풀필먼트 연동하기</b> 단계로 이동해주세요.
-          </p>
-        </div>
-
-        <div class="form-card" style="margin-top:0;">
-          <div class="form-body">
-            <div class="form-row">
-              <div class="form-label">등록 완료 확인<span class="req-dot">*</span></div>
-              <div class="form-field">
-                <div class="next-guide-box">
-                  <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700; color:#111827;">
-                    <input type="checkbox" id="registerDoneCheck" />
-                    고객사 등록 완료를 확인했습니다.
-                  </label>
-
-                  <div class="submit-guide">
-                    체크 완료 후 아래 버튼을 클릭하면 다음 단계로 이동합니다.
-                  </div>
-
-                  <a
-                    href="./fulfillment.html"
-                    id="nextStepBtn"
-                    class="btn-link"
-                    style="pointer-events:none; opacity:.45;"
-                  >
-                    풀필먼트 연동하기
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M5 12h14"></path>
-                      <path d="M13 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <div class="card finalMsg" id="finalMsg">
+      <p>✅ 모든 온보딩 단계를 완료했습니다. 담당자에게 완료 여부를 공유해주세요.</p>
+    </div>
   </div>
 
-  <div class="img-modal" id="imgModal">
-    <img id="zoomedImg" src="" alt="확대 이미지">
+  <div class="modalBack" id="zoomBack">
+    <div class="modal">
+      <div class="modalHead">
+        <p class="modalTitle" id="zoomTitle">이미지 확대</p>
+        <button class="btn" id="zoomClose" type="button">닫기</button>
+      </div>
+      <div class="modalBody">
+        <img class="zoomImg" id="zoomImg" src="" alt="zoom" />
+      </div>
+    </div>
   </div>
 
   <script>
-    function driveThumb(fileId, widthPx) {
-      return 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w' + String(widthPx || 1600);
+    /*************************************************
+     * 설정
+     *************************************************/
+    const APPS_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzJHhyl4gwS6R7MXtWKuFbTMZE0-DOwyGPA73l19dJD_SCF7S2mtyazd_1OmVvAoCJV/exec';
+
+    /*************************************************
+     * 전역 상태
+     *************************************************/
+    let payload = null;
+    let groupedSteps = [];
+    let completedSteps = [];
+
+    const params = new URLSearchParams(location.search);
+    const clientCode = params.get('client') || '';
+
+    function progressKey() {
+      return 'onboarding_progress_' + clientCode;
     }
 
-    const model = {
-      appTitle: '고객사 등록 가이드',
-      subtitle: '메일 수신부터 정보 입력, 로그인 확인까지 순서대로 진행해주세요.',
-      alertTitle: '고객사 등록 전 꼭! 확인해주세요.',
-      alertItems: [
-        {
-          lead: '고객사 등록 메일 수신 후',
-          strong: '24시간 이내',
-          tail: '고객사 등록이 완료되어야 합니다.',
-          sub: '24시간이 초과된 경우 gamgok@dohands.com 으로 재요청 부탁드립니다.'
-        },
-        {
-          lead: '계약 및 정산의 주체는',
-          strong: '네이버',
-          tail: '입니다.',
-          sub: ''
-        }
-      ],
-      images: {
-        step1Thumb: driveThumb('19WBv4xUmSRX1ZBShKHh8hpfmFd-fLY_P', 1600),
-        step1Zoom: driveThumb('19WBv4xUmSRX1ZBShKHh8hpfmFd-fLY_P', 4000),
-        step3Thumb: driveThumb('1LmDFZOvxjhhJ6CwCn4DzFkoD3uNiDRhr', 1600),
-        step3Zoom: driveThumb('1LmDFZOvxjhhJ6CwCn4DzFkoD3uNiDRhr', 4000)
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(progressKey());
+        const parsed = raw ? JSON.parse(raw) : [];
+        completedSteps = Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        completedSteps = [];
       }
-    };
-
-    function renderHeader() {
-      document.getElementById('appTitle').textContent = model.appTitle;
-      document.getElementById('subtitle').textContent = model.subtitle;
-      document.title = model.appTitle;
     }
 
-    function renderAlerts() {
-      document.getElementById('alertTitle').textContent = model.alertTitle;
-      const list = document.getElementById('alertList');
-      list.innerHTML = '';
+    function saveProgress() {
+      localStorage.setItem(progressKey(), JSON.stringify(completedSteps));
+    }
 
-      model.alertItems.forEach(item => {
-        const li = document.createElement('li');
-        const strongClass = item.strong === '네이버' ? 'em-naver' : 'em-poomgo';
+    function isCompleted(stepNo) {
+      return completedSteps.includes(stepNo);
+    }
 
-        li.innerHTML = `
-          ${item.lead}
-          <b class="${strongClass}">${item.strong}</b>
-          ${item.tail}
-          ${item.sub ? `<div style="font-size:13px; color:#6B7280; margin-top:2px;">${item.sub}</div>` : ''}
+    function isLocked(stepNo) {
+      return stepNo > 1 && !isCompleted(stepNo - 1);
+    }
+
+    /*************************************************
+     * JSONP 로딩
+     *************************************************/
+    function loadData() {
+      if (!clientCode) {
+        showEmpty('고객사 코드가 없습니다. URL 뒤에 ?client=고객사코드 형태로 접속해주세요.');
+        return;
+      }
+
+      if (!APPS_SCRIPT_WEBAPP_URL || APPS_SCRIPT_WEBAPP_URL.indexOf('여기에_앱스크립트_웹앱_URL_넣기') > -1) {
+        showEmpty('Apps Script 웹앱 URL이 설정되지 않았습니다.');
+        return;
+      }
+
+      window.renderOnboardingData = function(data) {
+        payload = data;
+        loadProgress();
+        buildSteps();
+        renderPage();
+      };
+
+      const src =
+        APPS_SCRIPT_WEBAPP_URL +
+        '?mode=data&client=' + encodeURIComponent(clientCode) +
+        '&callback=renderOnboardingData';
+
+      const script = document.createElement('script');
+      script.src = src;
+      script.onerror = function() {
+        showEmpty('가이드 데이터를 불러오지 못했습니다. Apps Script 배포 상태와 URL을 확인해주세요.');
+      };
+      document.body.appendChild(script);
+    }
+
+    /*************************************************
+     * 데이터 가공
+     *************************************************/
+    function buildSteps() {
+      const items = (payload && payload.guideItems) ? payload.guideItems : [];
+      const map = new Map();
+
+      items.forEach(item => {
+        if (!map.has(item.stepNo)) {
+          map.set(item.stepNo, {
+            stepNo: item.stepNo,
+            stepCode: item.stepCode,
+            stepName: item.stepName,
+            blocks: []
+          });
+        }
+        map.get(item.stepNo).blocks.push(item);
+      });
+
+      groupedSteps = Array.from(map.values()).sort((a, b) => a.stepNo - b.stepNo);
+    }
+
+    /*************************************************
+     * 렌더링
+     *************************************************/
+    function renderPage() {
+      const client = payload && payload.client ? payload.client : null;
+
+      document.title = client && client.pageTitle ? client.pageTitle : '온보딩 가이드';
+      document.getElementById('pageTitle').textContent = client && client.pageTitle ? client.pageTitle : '온보딩 가이드';
+      document.getElementById('pageSubtitle').textContent = client && client.subtitle ? client.subtitle : '아래 순서대로 진행해주세요.';
+      document.getElementById('clientChip').textContent = client && client.clientName ? client.clientName : '고객사';
+
+      renderSteps();
+      renderProgress();
+      renderFinalMessage();
+    }
+
+    function renderSteps() {
+      const container = document.getElementById('stepsContainer');
+
+      if (!groupedSteps.length) {
+        showEmpty('표시할 가이드 단계가 없습니다.');
+        return;
+      }
+
+      container.innerHTML = groupedSteps.map(step => {
+        const blocksHtml = step.blocks
+          .sort((a, b) => a.blockOrder - b.blockOrder)
+          .map(renderBlockHtml)
+          .join('');
+
+        return `
+          <section class="card step ${isLocked(step.stepNo) ? 'isLocked' : ''}" id="step${step.stepNo}" data-step="${step.stepNo}">
+            <div class="stepHeader">
+              <div class="leftHead">
+                <span class="badge ${isCompleted(step.stepNo) ? 'completed' : ''}" id="badge${step.stepNo}">
+                  ${isCompleted(step.stepNo) ? '✔ STEP ' + step.stepNo : 'STEP ' + step.stepNo}
+                </span>
+                <div>
+                  <p class="stepTitle">${escapeHtml(step.stepName)}</p>
+                  <p class="stepCode">${escapeHtml(step.stepCode)}</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn" id="toggle${step.stepNo}" type="button" style="${isCompleted(step.stepNo) ? '' : 'display:none;'}">
+                  보기
+                </button>
+                <button class="btn done" id="done${step.stepNo}" type="button" style="${isCompleted(step.stepNo) ? 'display:none;' : ''}">
+                  완료
+                </button>
+              </div>
+            </div>
+
+            <div class="lockHint">이전 단계를 완료하면 확인할 수 있습니다.</div>
+
+            <div class="stepBody">
+              <div class="blocks">
+                ${blocksHtml}
+              </div>
+            </div>
+          </section>
         `;
-        list.appendChild(li);
-      });
+      }).join('');
     }
 
-    function renderImages() {
-      const step1 = document.getElementById('step1Img');
-      step1.src = model.images.step1Thumb;
-      step1.dataset.zoomSrc = model.images.step1Zoom;
+    function renderBlockHtml(block) {
+      const type = block.blockType || '';
+      const title = block.blockTitle || '';
+      const path = block.path || '';
+      const desc = block.desc || '';
+      const imageThumb = block.imageThumb || '';
+      const imageZoom = block.imageZoom || '';
+      const buttonText = block.buttonText || '';
+      const buttonUrl = block.buttonUrl || '';
+      const highlight = block.highlight || '';
 
-      const step3 = document.getElementById('step3Img');
-      step3.src = model.images.step3Thumb;
-      step3.dataset.zoomSrc = model.images.step3Zoom;
+      const headHtml = title ? `
+        <div class="blockHead">
+          <p class="blockTitle">${escapeHtml(title)}</p>
+        </div>
+      ` : '';
+
+      const pathHtml = path ? `
+        <div class="path">
+          <span class="pathBadge">경로</span>
+          <div class="pathText">${escapeHtml(path)}</div>
+        </div>
+      ` : '';
+
+      const descHtml = desc ? `
+        <div class="desc">${escapeHtml(desc)}</div>
+      ` : '';
+
+      const highlightHtml = highlight ? `
+        <div class="highlight">${escapeHtml(highlight)}</div>
+      ` : '';
+
+      const imageHtml = imageThumb ? `
+        <div class="imgWrap">
+          <img
+            src="${escapeAttr(imageThumb)}"
+            data-zoom="${escapeAttr(imageZoom || imageThumb)}"
+            data-title="${escapeAttr(title || '이미지')}"
+            alt="${escapeAttr(title || '이미지')}"
+          />
+          <p class="imgHint">이미지를 클릭하면 확대됩니다.</p>
+        </div>
+      ` : '';
+
+      const buttonHtml = buttonText ? `
+        <div class="buttonArea">
+          ${buttonUrl
+            ? `<a class="btn primary" href="${escapeAttr(buttonUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(buttonText)}</a>`
+            : `<button class="btn primary" type="button" disabled>${escapeHtml(buttonText)}</button>`
+          }
+        </div>
+      ` : '';
+
+      const checklistHtml = type === '체크리스트' && desc ? `
+        <div class="checklist">
+          <ul>
+            ${desc.split('/').map(item => `<li>${escapeHtml(item.trim())}</li>`).join('')}
+          </ul>
+        </div>
+      ` : '';
+
+      const normalDescHtml = type === '체크리스트' ? '' : descHtml;
+
+      return `
+        <div class="block">
+          ${headHtml}
+          ${pathHtml}
+          ${type === '체크리스트' ? checklistHtml : normalDescHtml}
+          ${highlightHtml}
+          ${imageHtml}
+          ${buttonHtml}
+        </div>
+      `;
     }
 
-    function bindImageModal() {
-      const modal = document.getElementById('imgModal');
-      const zoomedImg = document.getElementById('zoomedImg');
+    function renderProgress() {
+      const total = groupedSteps.length;
+      const done = completedSteps.filter(stepNo => groupedSteps.some(s => s.stepNo === stepNo)).length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
 
-      document.querySelectorAll('.zoomable').forEach(img => {
-        img.addEventListener('click', () => {
-          zoomedImg.src = img.dataset.zoomSrc || img.src;
-          modal.classList.add('show');
-        });
-      });
-
-      modal.addEventListener('click', () => {
-        modal.classList.remove('show');
-        zoomedImg.src = '';
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          modal.classList.remove('show');
-          zoomedImg.src = '';
-        }
-      });
+      document.getElementById('progressMeta').textContent = done + ' / ' + total + ' 단계 완료';
+      document.getElementById('barFill').style.width = pct + '%';
     }
 
-    function bindNextStep() {
-      const check = document.getElementById('registerDoneCheck');
-      const btn = document.getElementById('nextStepBtn');
-      if (!check || !btn) return;
-
-      const saved = localStorage.getItem('customerRegisterDone') === 'Y';
-      check.checked = saved;
-      btn.style.pointerEvents = saved ? 'auto' : 'none';
-      btn.style.opacity = saved ? '1' : '.45';
-
-      check.addEventListener('change', () => {
-        const enabled = check.checked;
-
-        if (enabled) {
-          localStorage.setItem('customerRegisterDone', 'Y');
-        } else {
-          localStorage.removeItem('customerRegisterDone');
-        }
-
-        btn.style.pointerEvents = enabled ? 'auto' : 'none';
-        btn.style.opacity = enabled ? '1' : '.45';
-      });
+    function renderFinalMessage() {
+      const total = groupedSteps.length;
+      const done = completedSteps.filter(stepNo => groupedSteps.some(s => s.stepNo === stepNo)).length;
+      document.getElementById('finalMsg').style.display = (total > 0 && done === total) ? 'block' : 'none';
     }
 
-    renderHeader();
-    renderAlerts();
-    renderImages();
-    bindImageModal();
-    bindNextStep();
+    function showEmpty(message) {
+      document.getElementById('stepsContainer').innerHTML = `<div class="card empty">${escapeHtml(message)}</div>`;
+    }
+
+    /*************************************************
+     * 이벤트
+     *************************************************/
+    document.addEventListener('click', function(e) {
+      const img = e.target.closest('img[data-zoom]');
+      if (img) {
+        const stepEl = img.closest('.step');
+        if (stepEl && stepEl.classList.contains('isLocked')) return;
+        openZoom(img.getAttribute('data-zoom'), img.getAttribute('data-title'));
+        return;
+      }
+
+      const doneBtn = e.target.closest('button[id^="done"]');
+      if (doneBtn) {
+        const stepNo = Number(doneBtn.id.replace('done', ''));
+        if (!stepNo || isLocked(stepNo) || isCompleted(stepNo)) return;
+        completeStep(stepNo);
+        return;
+      }
+
+      const toggleBtn = e.target.closest('button[id^="toggle"]');
+      if (toggleBtn) {
+        const stepNo = Number(toggleBtn.id.replace('toggle', ''));
+        toggleStep(stepNo);
+      }
+    });
+
+    function completeStep(stepNo) {
+      if (!completedSteps.includes(stepNo)) {
+        completedSteps.push(stepNo);
+        completedSteps.sort((a, b) => a - b);
+        saveProgress();
+      }
+
+      const stepEl = document.getElementById('step' + stepNo);
+      if (stepEl) {
+        stepEl.classList.add('collapsed');
+      }
+
+      rerenderAfterStateChange();
+
+      const next = document.getElementById('step' + (stepNo + 1));
+      if (next) {
+        next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function toggleStep(stepNo) {
+      const stepEl = document.getElementById('step' + stepNo);
+      const toggleBtn = document.getElementById('toggle' + stepNo);
+      if (!stepEl || !toggleBtn) return;
+
+      const collapsed = stepEl.classList.contains('collapsed');
+      stepEl.classList.toggle('collapsed', !collapsed);
+      toggleBtn.textContent = collapsed ? '접기' : '보기';
+    }
+
+    function rerenderAfterStateChange() {
+      renderSteps();
+      renderProgress();
+      renderFinalMessage();
+    }
+
+    /*************************************************
+     * 이미지 확대
+     *************************************************/
+    const zoomBack = document.getElementById('zoomBack');
+    const zoomImg = document.getElementById('zoomImg');
+    const zoomTitle = document.getElementById('zoomTitle');
+    const zoomClose = document.getElementById('zoomClose');
+
+    function openZoom(src, title) {
+      if (!src) return;
+      zoomImg.src = src;
+      zoomTitle.textContent = title || '이미지 확대';
+      zoomBack.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeZoom() {
+      zoomBack.style.display = 'none';
+      zoomImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    zoomClose.addEventListener('click', closeZoom);
+    zoomBack.addEventListener('click', function(e) {
+      if (e.target === zoomBack) closeZoom();
+    });
+
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeZoom();
+      }
+    });
+
+    /*************************************************
+     * 유틸
+     *************************************************/
+    function escapeHtml(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str);
+    }
+
+    /*************************************************
+     * 시작
+     *************************************************/
+    loadData();
   </script>
 </body>
 </html>
