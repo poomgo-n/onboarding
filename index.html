@@ -1,657 +1,1092 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>행사 정보 제출</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>고객사 등록 가이드</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
-    :root{
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --line: #e5e7eb;
-      --line-soft: #eef2f7;
+    :root {
+      --bg: #F3F4F6;
+      --card: #FFFFFF;
       --text: #111827;
-      --muted: #6b7280;
-      --primary: #2563eb;
-      --primary-soft: #eff6ff;
-      --danger: #dc2626;
-      --danger-soft: #fef2f2;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --muted: #6B7280;
+      --line: #E5E7EB;
+      --poomgo: #0040D1;
+      --poomgo-weak: rgba(0, 64, 209, 0.06);
+      --danger: #DC2626;
+      --danger-weak: #FFF5F5;
+      --radius: 24px;
+      --content-max: 800px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
 
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
       background: var(--bg);
       color: var(--text);
-    }
-
-    .home-page, .form-page { min-height: 100vh; display: none; }
-    .home-page.active, .form-page.active { display: block; }
-
-    .home-wrap {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .home-card {
-      width: 100%;
-      max-width: 560px;
-      background: var(--card);
-      border: 1px solid var(--line-soft);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 44px 36px;
-      text-align: center;
-    }
-
-    .home-card h1 {
-      margin: 0 0 14px;
-      font-size: 32px;
-      line-height: 1.25;
-    }
-
-    .home-card p {
-      margin: 0 0 28px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 36px 20px 60px;
-    }
-
-    .page-hero { margin-bottom: 24px; }
-
-    .page-title {
-      margin: 0 0 10px;
-      font-size: 32px;
-      line-height: 1.25;
-    }
-
-    .page-desc {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
       line-height: 1.6;
     }
 
-    .panel {
+    .wrap {
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
+      max-width: var(--content-max);
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .alert-card {
+      width: 100%;
+      max-width: var(--content-max);
+      background: var(--danger-weak);
+      border: 1.5px solid #FECACA;
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .alert-card h3 {
+      color: #111827;
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 15px;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .alert-list li {
+      margin-bottom: 8px;
+    }
+
+    .alert-list b {
+      font-weight: 800;
+    }
+
+    .step-card {
+      width: 100%;
+      max-width: var(--content-max);
       background: var(--card);
-      border: 1px solid var(--line-soft);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 26px;
-      margin-bottom: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
 
-    .panel h2 {
-      margin: 0 0 18px;
-      font-size: 22px;
-    }
-
-    .grid {
-      display: grid;
+    .step-head {
+      padding: 24px 30px;
+      border-bottom: 1px solid #F3F4F6;
+      display: flex;
+      align-items: center;
       gap: 16px;
     }
 
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #1f2937;
+    .step-badge {
+      background: #F3F4F6;
+      color: #4B5563;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 14px;
-      border: 1px solid #d7dce5;
-      border-radius: 12px;
-      background: #fff;
-      font-size: 14px;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    .field textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
-    }
-
-    .required {
-      color: var(--danger);
-      margin-left: 4px;
-    }
-
-    .btn {
-      min-height: 44px;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 16px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--primary);
+    .step-badge.optional {
+      background: #111827;
       color: #fff;
     }
 
-    .btn-secondary {
-      background: var(--primary-soft);
-      color: var(--primary);
+    .step-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.3px;
     }
 
-    .btn-danger {
-      background: var(--danger-soft);
+    .step-body {
+      padding: 30px;
+    }
+
+    .desc-box {
+      background: #F9FAF7;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .desc-text {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    .desc-text b {
+      color: var(--poomgo);
+      font-weight: 800;
+    }
+
+    .em-danger {
       color: var(--danger);
+      font-weight: 800;
     }
 
-    .action-row {
-      display: flex;
+    .em-naver {
+      color: #03C75A !important;
+      font-weight: 800;
+    }
+
+    .em-poomgo {
+      color: var(--poomgo);
+      font-weight: 800;
+    }
+
+    .email-text {
+      color: #6B7280 !important;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .badge-inline {
+      display: inline-block;
+      background-color: var(--poomgo);
+      color: #fff !important;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      margin: 0 4px;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    .img-container {
+      position: relative;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      cursor: zoom-in;
+      background: #fff;
+    }
+
+    .img-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .img-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .info-group {
+      background: #F8FAFC;
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    .group-label {
+      display: block;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--poomgo);
+      margin-bottom: 10px;
+    }
+
+    .btn-wrap {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
+      background: var(--poomgo);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 17px;
+      transition: 0.2s;
     }
 
-    .template-card {
-      background: #fcfdff;
-      border: 1px solid #dbe7ff;
-      border-radius: 22px;
-      padding: 24px;
-      margin-bottom: 18px;
+    .btn-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 64, 209, 0.25);
     }
 
-    .template-header {
+    .route-badge {
+      display: inline-block;
+      background: #F1F5F9;
+      color: #475569;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      border: 1px solid #E2E8F0;
+    }
+
+    .route-step {
+      color: #475569;
+      font-weight: 700;
+    }
+
+    .route-sep {
+      color: #CBD5E1;
+      margin: 0 6px;
+      font-weight: 400;
+    }
+
+    .route-active {
+      color: var(--poomgo);
+      font-weight: 800;
+    }
+
+    .notice-box {
+      margin-top: 16px;
+      padding: 16px;
+      background: #FFFBEB;
+      border-left: 4px solid #F59E0B;
+      border-radius: 8px;
+    }
+
+    .notice-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      color: #92400E;
+      margin-bottom: 6px;
+    }
+
+    .notice-content {
+      font-size: 14px;
+      font-weight: 600;
+      color: #B45309;
+      margin: 0;
+    }
+
+    .img-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .img-modal.show {
+      display: flex;
+    }
+
+    .img-modal img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      cursor: zoom-out;
+    }
+
+    .form-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .form-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .form-card .card-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .template-title-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .template-badge {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      min-height: 28px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .template-title {
-      font-size: 22px;
-      font-weight: 800;
-      line-height: 1.3;
-    }
-
-    .template-sub {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .sub-block {
-      margin-top: 22px;
-      padding: 22px;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #E5E7EB;
       background: #fff;
-    }
-
-    .sub-block-title {
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .sub-block-desc {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-      border: 1px solid var(--line-soft);
-      border-radius: 16px;
-      background: #fff;
-    }
-
-    .data-table {
-      width: 100%;
-      min-width: 760px;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-
-    .data-table th,
-    .data-table td {
-      border-bottom: 1px solid var(--line-soft);
-      padding: 10px;
-      text-align: left;
-      vertical-align: middle;
-    }
-
-    .data-table th {
-      background: #f8fafc;
-      font-size: 13px;
-      font-weight: 800;
-      color: #374151;
-    }
-
-    .data-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .data-table input {
-      width: 100%;
-      min-height: 42px;
-      padding: 0 12px;
-      border: 1px solid #d7dce5;
-      border-radius: 10px;
-      font-size: 14px;
-      outline: none;
-      background: #fff;
-    }
-
-    .data-table input:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
-    }
-
-    .cell-btn {
-      width: 100%;
-      min-width: 68px;
-    }
-
-    .submit-panel {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .notice {
-      color: var(--muted);
+    .head-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-weight: 800;
+      color: #111827;
       font-size: 14px;
-      line-height: 1.6;
     }
 
-    .hidden {
-      display: none !important;
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 960px) {
-      .grid-2, .grid-3 {
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge.req {
+      background: #F97316;
+      color: #fff;
+    }
+
+    .badge.blue {
+      background: #2563EB;
+      color: #fff;
+    }
+
+    .head-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #6B7280;
+      font-size: 13px;
+    }
+
+    .checkbox-like {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 12px;
+      color: #374151;
+    }
+
+    .checkbox-like .box {
+      width: 14px;
+      height: 14px;
+      border: 1px solid #D1D5DB;
+      border-radius: 3px;
+      background: #fff;
+    }
+
+    .form-body {
+      background: #fff;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 16px;
+      border-bottom: 1px solid #EEF2F7;
+    }
+
+    .form-row:last-child {
+      border-bottom: none;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #111827;
+      font-weight: 700;
+      flex-wrap: wrap;
+    }
+
+    .req-dot {
+      color: #F97316;
+      font-weight: 900;
+      margin-left: 2px;
+    }
+
+    .help {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid #D1D5DB;
+      color: #9CA3AF;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .form-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .fake-input {
+      height: 34px;
+      min-width: 280px;
+      padding: 0 12px;
+      border: 1px solid #E5E7EB;
+      border-radius: 4px;
+      background: #fff;
+      color: #9CA3AF;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+    }
+
+    .fake-input.w-sm {
+      min-width: 120px;
+    }
+
+    .fake-input.w-md {
+      min-width: 220px;
+    }
+
+    .fake-input.w-lg {
+      min-width: 420px;
+    }
+
+    .highlight-red {
+      color: #DC2626;
+      font-weight: 700;
+    }
+
+    .fake-btn {
+      height: 34px;
+      padding: 0 12px;
+      border: 1px solid #E5E7EB;
+      background: #fff;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .inline-note {
+      font-size: 13px;
+      color: #DC2626;
+      font-weight: 700;
+    }
+
+    .warn-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 16px 14px;
+      color: #6B7280;
+      font-size: 13px;
+    }
+
+    .warn-ico {
+      color: #F59E0B;
+      font-weight: 900;
+    }
+
+    .submit-guide {
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    .submit-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #2563EB;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0 4px;
+    }
+
+    .notice-box-inline {
+      margin: 12px 16px;
+      padding: 12px 14px;
+      background: #EEF3FF;
+      border: 1px solid #0040D1;
+      border-radius: 6px;
+      color: #0040D1;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 26px;
+      }
+
+      .step-head {
+        padding: 20px;
+      }
+
+      .step-body {
+        padding: 20px;
+      }
+
+      .step-title {
+        font-size: 18px;
+      }
+
+      .form-row {
         grid-template-columns: 1fr;
       }
 
-      .template-header,
-      .submit-panel {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .container {
-        padding: 24px 14px 48px;
-      }
-
-      .panel,
-      .template-card,
-      .sub-block {
-        padding: 18px;
-      }
-
-      .data-table {
-        min-width: 700px;
+      .fake-input,
+      .fake-input.w-sm,
+      .fake-input.w-md,
+      .fake-input.w-lg {
+        min-width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div id="homePage" class="home-page active">
-    <div class="home-wrap">
-      <div class="home-card">
-        <h1>행사 정보 제출</h1>
-        <p>
-          고객사 공통 행사 정보 양식입니다.<br>
-          아래 버튼을 눌러 입력 화면을 열어주세요.
-        </p>
-        <button class="btn btn-primary" onclick="openFormPage()">행사 정보 입력하기</button>
-      </div>
+  <div class="wrap">
+
+    <header class="header">
+      <h1 id="appTitle"></h1>
+      <p id="subtitle"></p>
+    </header>
+
+    <div class="alert-card">
+      <h3>⚠️ <span id="alertTitle"></span></h3>
+      <ul class="alert-list" id="alertList"></ul>
     </div>
+
+    <section class="step-card">
+      <div class="step-head">
+        <span class="step-badge">Step 1</span>
+        <h2 class="step-title">고객사 등록 메일 수신</h2>
+      </div>
+      <div class="step-body">
+        <div class="desc-box">
+          <p class="desc-text">
+            수신된 메일에서 <span class="badge-inline">고객사 등록하기</span> 버튼을 클릭합니다.<br>
+            메일 수신 후 <span class="em-danger">24시간 이내</span> 등록이 완료되어야 합니다.
+          </p>
+        </div>
+        <div class="img-container">
+          <img
+            id="step1Img"
+            class="zoomable"
+            src=""
+            data-zoom-src=""
+            alt="Step 1 이미지"
+          >
+          <div class="img-hint">클릭해서 확대</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-head">
+        <span class="step-badge">Step 2</span>
+        <h2 class="step-title">고객사 정보 입력</h2>
+      </div>
+      <div class="step-body">
+        <div class="info-grid">
+          <div class="info-group">
+            <span class="group-label">사업자 및 브랜드 정보</span>
+
+            <div class="form-wrap">
+
+              <div class="form-card">
+                <div class="card-head">
+                  <div class="head-left">
+                    <div class="card-title">기본 정보</div>
+                    <div class="badges">
+                      <span class="badge req">필수</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-body">
+                  <div class="form-row">
+                    <div class="form-label">고객사<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">브랜드명을 입력하세요.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card">
+                <div class="card-head">
+                  <div class="head-left">
+                    <div class="card-title">사업자 정보</div>
+                    <span class="help">?</span>
+                    <div class="badges">
+                      <span class="badge req">필수</span>
+                      <span class="badge blue">국외 출고 필수</span>
+                    </div>
+                  </div>
+                  <div class="notice-box-inline">
+                    ⚠ 사업자 정보는 이미지에 표기된 정보와 동일하게 입력해주셔야 합니다.
+                  </div>
+                </div>
+
+                <div class="form-body">
+                  <div class="form-row">
+                    <div class="form-label">사업자명<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">네이버</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">업태 및 업종<span class="req-dot">*</span> <span class="help">?</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-sm highlight-red">-</div>
+                      <div class="fake-input w-sm highlight-red">-</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">대표자명<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">최수연</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">사업자 등록 번호<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-sm highlight-red">220</div>
+                      <div>-</div>
+                      <div class="fake-input w-sm highlight-red">81</div>
+                      <div>-</div>
+                      <div class="fake-input w-sm highlight-red">62517</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">주소<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-sm highlight-red">13561</div>
+                      <div class="fake-input w-md highlight-red">경기 성남시 분당구 정자일로 95</div>
+                      <button type="button" class="fake-btn">우편번호 찾기</button>
+                      <div class="fake-input w-md">.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">세금계산서 담당자명<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">네이버</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">세금계산서 발급 이메일<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">poomgo@dohands.com</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">통관 고유 부호<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">미입력</div>
+                      <button type="button" class="fake-btn">고유부호 발급 및 확인</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card">
+                <div class="card-head">
+                  <div class="head-left">
+                    <div class="card-title">브랜드 정보</div>
+                    <span class="help">?</span>
+                    <div class="badges">
+                      <span class="badge req">필수</span>
+                      <span class="badge blue">국외 출고 필수</span>
+                    </div>
+                  </div>
+
+                  <div class="head-right">
+                    <div class="checkbox-like">
+                      <span class="box"></span>
+                      사업자정보와 동일
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-body">
+                  <div class="form-row">
+                    <div class="form-label">브랜드명<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">고객사명과 동일하게 입력해주세요.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">대표 전화번호<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">대표 CS번호를 입력하세요</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">주소<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-sm highlight-red">우편번호</div>
+                      <div class="fake-input w-md highlight-red">브랜드 주소를 입력해주세요.</div>
+                      <button type="button" class="fake-btn">우편번호 찾기</button>
+                      <div class="fake-input w-md">상세주소</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card">
+                <div class="card-head">
+                  <div class="head-left">
+                    <div class="card-title">지정 반품 정보</div>
+                    <div class="badges">
+                      <span class="badge req">필수</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-body">
+                  <div class="form-row">
+                    <div class="form-label">수화인명</div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">브랜드명을 입력해주세요.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">주소<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-sm">우편번호</div>
+                      <div class="fake-input w-md highlight-red">반품 수거지 주소를 입력해주세요.</div>
+                      <button type="button" class="fake-btn">우편번호 찾기</button>
+                      <div class="fake-input w-md">상세주소</div>
+                    </div>
+                  </div>
+
+                  <div class="warn-line">
+                    <div class="warn-ico">⚠</div>
+                    <div>지금 입력한 주소로 반품 받고 싶다면 회수할 때 배송 계약에서 ‘지정 반품’을 선택하세요</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card">
+                <div class="card-head">
+                  <div class="head-left">
+                    <div class="card-title">사용자 정보</div>
+                    <div class="badges">
+                      <span class="badge req">필수</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-body">
+                  <div class="form-row">
+                    <div class="form-label">사용자명<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">현재 등록중인 담당자명을 입력해주세요.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">전화번호<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">유선 소통이 가능한 휴대폰 번호를 입력해주세요.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">이메일<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-md highlight-red">현재 등록중인 담당자 메일로 자동 세팅됩니다.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">비밀번호<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-lg highlight-red">품고 나우 로그인 시 사용할 비밀번호를 설정합니다.</div>
+                      <div class="inline-note">※ 알파벳 대문자, 소문자, 특수문자, 숫자를 모두 포함 8자 이상</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-label">비밀번호 확인<span class="req-dot">*</span></div>
+                    <div class="form-field">
+                      <div class="fake-input w-lg">동일하게 한번 더 입력</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card">
+                <div class="form-body">
+                  <div class="form-row">
+                    <div class="form-label">
+                      서비스 이용약관 동의<span class="req-dot">*</span>
+                    </div>
+
+                    <div class="form-field" style="flex-direction:column; align-items:flex-start; gap:8px;">
+                      <label style="display:flex; align-items:center; gap:8px; font-size:13px;">
+                        <input type="checkbox" />
+                        서비스 이용약관에 동의합니다.
+                      </label>
+
+                      <div class="submit-guide">
+                        서비스 이용약관에 동의합니다를 체크 후
+                        상단 <span class="submit-badge">등록완료</span> 버튼을 클릭해주세요.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-head">
+        <span class="step-badge">Step 3</span>
+        <h2 class="step-title">품고 나우 로그인 확인</h2>
+      </div>
+      <div class="step-body" style="text-align: center;">
+        <p class="desc-text" style="margin-bottom: 24px;">
+          등록한 계정으로 정상 로그인이 되는지 확인합니다.<br>
+          문제가 있을 경우 <span class="email-text">gamgok@dohands.com</span>으로 문의 해주세요.
+        </p>
+
+        <div class="img-container" style="margin-bottom: 24px;">
+          <img
+            id="step3Img"
+            class="zoomable"
+            src=""
+            data-zoom-src=""
+            alt="Step 3 이미지"
+          >
+          <div class="img-hint">클릭해서 확대</div>
+        </div>
+
+        <div class="btn-wrap">
+          <a href="https://seller.poomgo.com" class="btn-link" target="_blank" rel="noopener noreferrer">
+            품고 나우 바로가기
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-head">
+        <span class="step-badge optional">선택</span>
+        <h2 class="step-title">구성원 추가 안내</h2>
+      </div>
+      <div class="step-body">
+        <p class="desc-text" style="margin-bottom: 16px;">
+          품고 나우 접속이 필요한 팀원이 있는 경우 구성원을 추가해주세요.
+        </p>
+
+        <div class="desc-box" style="margin-bottom: 0;">
+          <span class="route-badge">경로</span>
+          <span class="route-step">품고 나우</span>
+          <span class="route-sep">></span>
+          <span class="route-step">등록</span>
+          <span class="route-sep">></span>
+          <span class="route-active">+ 구성원 추가 클릭</span>
+          <span class="route-sep">></span>
+          <span class="route-step">이름, 이메일, 전화번호 입력</span>
+          <span class="route-sep">></span>
+          <span class="badge-inline">구성원 추가</span> <b>클릭</b>
+        </div>
+
+        <div class="notice-box">
+          <strong class="notice-title">💡TIP</strong>
+          <p class="notice-content">
+            구성원 등록 시 이메일 중복 확인이 진행되어야만 추가가 가능합니다.<br>
+            초대받은 구성원이 비밀번호 설정 시간을 초과한 경우<br>
+            품고 나우 접속 후 비밀번호 찾기를 통해 메일을 재수신하여 접속할 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
   </div>
 
-  <div id="formPage" class="form-page">
-    <div class="container">
-      <div class="page-hero">
-        <h1 class="page-title">행사 정보 입력</h1>
-        <p class="page-desc">
-          고객사명 입력 후 행사별 정보를 작성해주세요.
-        </p>
-      </div>
-
-      <div class="panel">
-        <h2>기본 정보</h2>
-        <div class="grid grid-2">
-          <div class="field">
-            <label>고객사명<span class="required">*</span></label>
-            <input type="text" id="customerName" placeholder="고객사명을 입력하세요.">
-          </div>
-        </div>
-
-        <div class="action-row">
-          <button class="btn btn-secondary" type="button" onclick="addTemplate()">+ 템플릿 추가</button>
-        </div>
-      </div>
-
-      <div id="templatesContainer"></div>
-
-      <div class="panel">
-        <div class="submit-panel">
-          <div class="notice">
-            현재는 화면 구조 반영 단계입니다. 다음 단계에서 시트 저장 기능을 연결하면 됩니다.
-          </div>
-          <button class="btn btn-primary" type="button" onclick="submitPreview()">최종 제출</button>
-        </div>
-      </div>
-    </div>
+  <div class="img-modal" id="imgModal">
+    <img id="zoomedImg" src="" alt="확대 이미지">
   </div>
 
   <script>
-    let templateCounter = 0;
-
-    function openFormPage() {
-      const url = window.location.origin + window.location.pathname + '?form=1';
-      window.location.href = url;
+    function driveThumb(fileId, widthPx) {
+      return 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w' + String(widthPx || 1600);
     }
 
-    function initPage() {
-      const params = new URLSearchParams(window.location.search);
-      const isForm = params.get('form') === '1';
-
-      document.getElementById('homePage').classList.toggle('active', !isForm);
-      document.getElementById('formPage').classList.toggle('active', isForm);
-
-      if (isForm) {
-        const container = document.getElementById('templatesContainer');
-        container.innerHTML = '';
-        templateCounter = 0;
-        addTemplate(true);
+    const model = {
+      appTitle: '고객사 등록 가이드',
+      subtitle: '메일 수신부터 정보 입력, 로그인 확인까지 순서대로 진행해주세요.',
+      alertTitle: '고객사 등록 전 꼭! 확인해주세요.',
+      alertItems: [
+        {
+          lead: '고객사 등록 메일 수신 후',
+          strong: '24시간 이내',
+          tail: '고객사 등록이 완료되어야 합니다.',
+          sub: '24시간이 초과된 경우 gamgok@dohands.com 으로 재요청 부탁드립니다.'
+        },
+        {
+          lead: '계약 및 정산의 주체는',
+          strong: '네이버',
+          tail: '입니다.',
+          sub: ''
+        }
+      ],
+      images: {
+        step1Thumb: driveThumb('19WBv4xUmSRX1ZBShKHh8hpfmFd-fLY_P', 1600),
+        step1Zoom: driveThumb('19WBv4xUmSRX1ZBShKHh8hpfmFd-fLY_P', 4000),
+        step3Thumb: driveThumb('1LmDFZOvxjhhJ6CwCn4DzFkoD3uNiDRhr', 1600),
+        step3Zoom: driveThumb('1LmDFZOvxjhhJ6CwCn4DzFkoD3uNiDRhr', 4000),
+        optionalMemberThumb1: driveThumb('1Z-bil0A-oTwj29BvatqP07sduxUNnvzp', 1600),
+        optionalMemberZoom1: driveThumb('1Z-bil0A-oTwj29BvatqP07sduxUNnvzp', 4000),
+        optionalMemberThumb2: driveThumb('14M7LsewbLGPIEUkp99wpRaJwjqb-2Zxm', 1600),
+        optionalMemberZoom2: driveThumb('14M7LsewbLGPIEUkp99wpRaJwjqb-2Zxm', 4000)
       }
+    };
+
+    function renderHeader() {
+      document.getElementById('appTitle').textContent = model.appTitle;
+      document.getElementById('subtitle').textContent = model.subtitle;
+      document.title = model.appTitle;
     }
 
-    function addTemplate(isFixed = false) {
-      templateCounter++;
-      const templateId = `tpl-${Date.now()}-${templateCounter}`;
-      const container = document.getElementById('templatesContainer');
+    function renderAlerts() {
+      document.getElementById('alertTitle').textContent = model.alertTitle;
+      const list = document.getElementById('alertList');
+      list.innerHTML = '';
 
-      const html = `
-        <div class="template-card" data-template-id="${templateId}" data-fixed="${isFixed ? 'Y' : 'N'}">
-          <div class="template-header">
-            <div class="template-title-wrap">
-              <div class="template-badge">행사 템플릿 ${templateCounter}</div>
-              <div class="template-title">행사 입력</div>
-              <div class="template-sub">행사 정보, 예상 물량, 메인 품목을 입력해주세요.</div>
-            </div>
-            ${isFixed ? '' : `<button class="btn btn-danger" type="button" onclick="removeTemplate('${templateId}')">템플릿 삭제</button>`}
-          </div>
+      model.alertItems.forEach(item => {
+        const li = document.createElement('li');
 
-          <div class="sub-block">
-            <h3 class="sub-block-title">행사 정보</h3>
-            <div class="grid grid-2">
-              <div class="field">
-                <label>행사명<span class="required">*</span></label>
-                <input type="text" class="eventName" placeholder="행사명을 입력하세요.">
-              </div>
+        const strongClass = item.strong === '네이버' ? 'em-naver' : 'em-poomgo';
+        li.innerHTML = `
+          ${item.lead}
+          <b class="${strongClass}">${item.strong}</b>
+          ${item.tail}
+          ${item.sub ? `<div style="font-size:13px; color:#6B7280; margin-top:2px;">${item.sub}</div>` : ''}
+        `;
 
-              <div class="field">
-                <label>행사 기간<span class="required">*</span></label>
-                <input type="text" class="eventPeriod" placeholder="예: 2026-03-10 ~ 2026-03-15">
-              </div>
-
-              <div class="field">
-                <label>행사 기간 내 라이브 유무<span class="required">*</span></label>
-                <select class="hasLive" onchange="toggleLiveFields(this)">
-                  <option value="N">N</option>
-                  <option value="Y">Y</option>
-                </select>
-              </div>
-
-              <div class="field liveField hidden">
-                <label>라이브 시간대</label>
-                <input type="text" class="liveTime" placeholder="예: 19:00 ~ 20:30">
-              </div>
-
-              <div class="field">
-                <label>톡톡메세지 발송 유무<span class="required">*</span></label>
-                <select class="hasTalkMessage" onchange="toggleTalkFields(this)">
-                  <option value="N">N</option>
-                  <option value="Y">Y</option>
-                </select>
-              </div>
-
-              <div class="field talkField hidden">
-                <label>발송 날짜/시간</label>
-                <input type="text" class="talkSendDateTime" placeholder="예: 2026-03-12 18:00">
-              </div>
-
-              <div class="field">
-                <label>사은품 유무<span class="required">*</span></label>
-                <select class="hasGift" onchange="toggleGiftFields(this)">
-                  <option value="N">N</option>
-                  <option value="Y">Y</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="sub-block giftFieldWrap hidden" style="margin-top:18px;">
-              <h3 class="sub-block-title">사은품 정보</h3>
-              <p class="sub-block-desc">사은품 유무가 Y인 경우, 각 행으로 입력해주세요.</p>
-
-              <div class="table-wrap">
-                <table class="data-table">
-                  <colgroup>
-                    <col style="width: 38%;">
-                    <col style="width: 32%;">
-                    <col style="width: 15%;">
-                    <col style="width: 15%;">
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th>사은품 적용 기준</th>
-                      <th>상품(SKU)명</th>
-                      <th>수량</th>
-                      <th>삭제</th>
-                    </tr>
-                  </thead>
-                  <tbody class="giftRowsContainer"></tbody>
-                </table>
-              </div>
-
-              <div class="action-row">
-                <button class="btn btn-secondary" type="button" onclick="addGiftRow('${templateId}')">+ 사은품 행 추가</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="sub-block">
-            <h3 class="sub-block-title">예상 물량</h3>
-            <div class="grid grid-3">
-              <div class="field">
-                <label>주문 건 수<span class="required">*</span></label>
-                <input type="number" class="dailyExpectedOrders" placeholder="상품주문번호 기준">
-              </div>
-
-              <div class="field liveOrderField hidden">
-                <label>라이브 시간대 예상 주문 건 수</label>
-                <input type="number" class="liveExpectedOrders" placeholder="라이브 예상 주문 건 수">
-              </div>
-
-              <div class="field">
-                <label>총 상품(SKU) 수량<span class="required">*</span></label>
-                <input type="number" class="dailyExpectedShipmentQty" placeholder="전체 출고 UNIT 예상 수">
-              </div>
-            </div>
-          </div>
-
-          <div class="sub-block">
-            <h3 class="sub-block-title">메인 품목</h3>
-            <p class="sub-block-desc">상품번호, 상품명, 할인율을 입력해주세요.</p>
-
-            <div class="table-wrap">
-              <table class="data-table">
-                <colgroup>
-                  <col style="width: 24%;">
-                  <col style="width: 38%;">
-                  <col style="width: 20%;">
-                  <col style="width: 18%;">
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th>상품번호</th>
-                    <th>상품명</th>
-                    <th>할인율</th>
-                    <th>삭제</th>
-                  </tr>
-                </thead>
-                <tbody class="productsContainer"></tbody>
-              </table>
-            </div>
-
-            <div class="action-row">
-              <button class="btn btn-secondary" type="button" onclick="addProductRow('${templateId}')">+ 상품 추가</button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      container.insertAdjacentHTML('beforeend', html);
-
-      for (let i = 0; i < 10; i++) {
-        addProductRow(templateId);
-      }
-    }
-
-    function removeTemplate(templateId) {
-      const el = document.querySelector(`[data-template-id="${templateId}"]`);
-      if (el) el.remove();
-    }
-
-    function addGiftRow(templateId) {
-      const templateEl = document.querySelector(`[data-template-id="${templateId}"]`);
-      const giftContainer = templateEl.querySelector('.giftRowsContainer');
-
-      const row = document.createElement('tr');
-      row.className = 'gift-row';
-      row.innerHTML = `
-        <td><input type="text" class="giftConditionRow" placeholder="예: 5만원 이상 구매 시"></td>
-        <td><input type="text" class="giftSkuNameRow" placeholder="상품(SKU)명"></td>
-        <td><input type="number" class="giftQtyRow" placeholder="수량"></td>
-        <td><button class="btn btn-danger cell-btn" type="button" onclick="this.closest('tr').remove()">삭제</button></td>
-      `;
-      giftContainer.appendChild(row);
-    }
-
-    function addProductRow(templateId) {
-      const templateEl = document.querySelector(`[data-template-id="${templateId}"]`);
-      const productsContainer = templateEl.querySelector('.productsContainer');
-
-      const row = document.createElement('tr');
-      row.className = 'product-row';
-      row.innerHTML = `
-        <td><input type="text" class="productNo" placeholder="상품번호"></td>
-        <td><input type="text" class="productName" placeholder="상품명"></td>
-        <td><input type="text" class="discountRate" placeholder="예: 10%"></td>
-        <td><button class="btn btn-danger cell-btn" type="button" onclick="this.closest('tr').remove()">삭제</button></td>
-      `;
-      productsContainer.appendChild(row);
-    }
-
-    function toggleLiveFields(selectEl) {
-      const templateCard = selectEl.closest('.template-card');
-      const show = selectEl.value === 'Y';
-
-      templateCard.querySelectorAll('.liveField').forEach(el => {
-        el.classList.toggle('hidden', !show);
-      });
-
-      templateCard.querySelectorAll('.liveOrderField').forEach(el => {
-        el.classList.toggle('hidden', !show);
+        list.appendChild(li);
       });
     }
 
-    function toggleTalkFields(selectEl) {
-      const templateCard = selectEl.closest('.template-card');
-      const show = selectEl.value === 'Y';
+    function renderImages() {
+      const step1 = document.getElementById('step1Img');
+      step1.src = model.images.step1Thumb;
+      step1.dataset.zoomSrc = model.images.step1Zoom;
 
-      templateCard.querySelectorAll('.talkField').forEach(el => {
-        el.classList.toggle('hidden', !show);
+      const step3 = document.getElementById('step3Img');
+      step3.src = model.images.step3Thumb;
+      step3.dataset.zoomSrc = model.images.step3Zoom;
+    }
+
+    function bindImageModal() {
+      const modal = document.getElementById('imgModal');
+      const zoomedImg = document.getElementById('zoomedImg');
+
+      document.querySelectorAll('.zoomable').forEach(img => {
+        img.addEventListener('click', () => {
+          zoomedImg.src = img.dataset.zoomSrc || img.src;
+          modal.classList.add('show');
+        });
+      });
+
+      modal.addEventListener('click', () => {
+        modal.classList.remove('show');
+        zoomedImg.src = '';
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          modal.classList.remove('show');
+          zoomedImg.src = '';
+        }
       });
     }
 
-    function toggleGiftFields(selectEl) {
-      const templateCard = selectEl.closest('.template-card');
-      const giftWrap = templateCard.querySelector('.giftFieldWrap');
-      const show = selectEl.value === 'Y';
-
-      giftWrap.classList.toggle('hidden', !show);
-
-      if (show && giftWrap.querySelectorAll('.gift-row').length === 0) {
-        addGiftRow(templateCard.dataset.templateId);
-      }
-    }
-
-    function submitPreview() {
-      const customerName = document.getElementById('customerName').value.trim();
-      if (!customerName) {
-        alert('고객사명을 입력해주세요.');
-        return;
-      }
-
-      alert('컬럼 헤더 1행 고정 버전으로 반영되었습니다.');
-    }
-
-    initPage();
+    renderHeader();
+    renderAlerts();
+    renderImages();
+    bindImageModal();
   </script>
 </body>
 </html>
