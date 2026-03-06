@@ -305,30 +305,32 @@
     }
 
     .path{
-      margin:0 20px 16px;
-      padding:14px 2px;
-      border-top:1px solid var(--path-line);
-      border-bottom:1px solid var(--path-line);
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-    }
+  margin:0 20px 16px;
+  padding:14px 0;
+  border-top:1px solid var(--path-line);
+  border-bottom:1px solid var(--path-line);
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
 
-    .pathBadge{
-      color:var(--path-label);
-      font-size:13px;
-      font-weight:900;
-      flex:0 0 auto;
-      padding-top:1px;
-    }
+.pathBadge{
+  color:var(--path-label);
+  font-size:13px;
+  font-weight:900;
+  line-height:1.7;
+  flex:0 0 auto;
+  padding-top:1px;
+  white-space:nowrap;
+}
 
-    .pathText{
-      color:var(--path-text);
-      font-size:15px;
-      font-weight:800;
-      line-height:1.7;
-      word-break:break-word;
-    }
+.pathText{
+  color:var(--path-text);
+  font-size:15px;
+  font-weight:800;
+  line-height:1.7;
+  word-break:break-word;
+}
 
     .pathText a,
     .desc a,
