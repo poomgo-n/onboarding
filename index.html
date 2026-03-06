@@ -7,30 +7,28 @@
 
   <style>
     :root{
-      --bg:#F5F7FB;
+      --bg:#F7F8FA;
       --card:#FFFFFF;
-      --text:#0F172A;
-      --muted:#667085;
-      --line:#E6EBF2;
+      --text:#111827;
+      --muted:#6B7280;
+      --line:#E5E7EB;
 
       --poomgo:#0040D1;
       --poomgo-weak:#EEF4FF;
-      --poomgo-soft:#F5F8FF;
+      --poomgo-soft:#F8FAFF;
 
       --ok:#16A34A;
       --ok-weak:#ECFDF5;
       --ok-border:#BBF7D0;
 
-      --highlight-bg:#FFFFFF;
-      --highlight-border:#F3C98B;
-      --highlight-left:#F59E0B;
-      --highlight-tag-bg:#FFF7ED;
-      --highlight-tag-border:#FDBA74;
-      --highlight-tag-text:#C2410C;
-      --highlight-text:#7C2D12;
+      --warn-bg:#FFF9F0;
+      --warn-line:#F59E0B;
+      --warn-tag-bg:#FFF3D6;
+      --warn-tag-text:#B45309;
+      --warn-text:#92400E;
 
-      --shadow:0 10px 28px rgba(15,23,42,.06);
-      --radius:20px;
+      --shadow:0 6px 18px rgba(15,23,42,.05);
+      --radius:18px;
     }
 
     *{ box-sizing:border-box; }
@@ -43,7 +41,7 @@
     }
 
     .wrap{
-      max-width:1400px;
+      max-width:1360px;
       margin:0 auto;
       padding:24px 18px 40px;
     }
@@ -57,7 +55,7 @@
       font-size:30px;
       font-weight:900;
       letter-spacing:-0.03em;
-      color:#0B1736;
+      color:#0F172A;
     }
 
     .sub{
@@ -90,7 +88,6 @@
       margin:0;
       font-size:15px;
       font-weight:900;
-      color:#111827;
     }
 
     .progressMeta{
@@ -101,7 +98,7 @@
 
     .bar{
       width:100%;
-      height:12px;
+      height:10px;
       border-radius:999px;
       background:#E8EDF5;
       overflow:hidden;
@@ -116,7 +113,7 @@
 
     .layout{
       display:grid;
-      grid-template-columns:320px 1fr;
+      grid-template-columns:300px 1fr;
       gap:18px;
       align-items:start;
     }
@@ -160,8 +157,8 @@
     }
 
     .stepNavItem.current{
-      border-color:#BFD1FF;
-      background:#F7FAFF;
+      border-color:#C8D7FF;
+      background:#F8FBFF;
       box-shadow:0 0 0 3px rgba(0,64,209,.04);
     }
 
@@ -180,7 +177,7 @@
     }
 
     .navBtn{
-      border:1px solid #D8E0EC;
+      border:1px solid #DCE3EC;
       background:#fff;
       border-radius:10px;
       padding:6px 10px;
@@ -205,8 +202,8 @@
 
     .stageHead{
       padding:20px 20px 16px;
-      border-bottom:1px solid var(--line);
-      background:#FCFDFE;
+      border-bottom:1px solid #EEF2F7;
+      background:#fff;
     }
 
     .stageTitleRow{
@@ -237,32 +234,32 @@
       font-weight:900;
       line-height:1.25;
       letter-spacing:-.03em;
-      color:#0B1736;
+      color:#0F172A;
     }
 
     .blocks{
       padding:18px;
       display:flex;
       flex-direction:column;
-      gap:16px;
-      background:#FBFCFE;
+      gap:14px;
+      background:#FCFDFE;
     }
 
     .block{
-      border:1px solid var(--line);
-      border-radius:18px;
-      overflow:hidden;
+      border:1px solid #E9EEF5;
+      border-radius:16px;
       background:#fff;
+      overflow:hidden;
     }
 
     .blockHead{
-      padding:18px 18px 12px;
-      background:#FFFFFF;
+      padding:18px 18px 10px;
+      background:#fff;
     }
 
     .blockTitle{
       margin:0;
-      font-size:21px;
+      font-size:22px;
       font-weight:900;
       line-height:1.4;
       letter-spacing:-0.02em;
@@ -270,29 +267,26 @@
     }
 
     .highlight{
-      margin:0 18px 18px;
-      padding:16px 18px;
-      border:1px solid var(--highlight-border);
-      border-left:6px solid var(--highlight-left);
-      border-radius:16px;
-      background:var(--highlight-bg);
+      margin:0 18px 14px;
+      padding:14px 16px;
+      border-radius:14px;
+      background:var(--warn-bg);
+      border-left:4px solid var(--warn-line);
       display:flex;
-      gap:12px;
+      gap:10px;
       align-items:flex-start;
-      box-shadow:0 2px 8px rgba(245,158,11,.06);
     }
 
     .highlightTag{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:54px;
-      height:30px;
+      min-width:48px;
+      height:28px;
       padding:0 10px;
       border-radius:999px;
-      background:var(--highlight-tag-bg);
-      color:var(--highlight-tag-text);
-      border:1px solid var(--highlight-tag-border);
+      background:var(--warn-tag-bg);
+      color:var(--warn-tag-text);
       font-size:12px;
       font-weight:900;
       flex:0 0 auto;
@@ -300,32 +294,33 @@
     }
 
     .highlightText{
-      color:var(--highlight-text);
-      font-size:15px;
+      color:var(--warn-text);
+      font-size:14px;
       font-weight:900;
       line-height:1.75;
       word-break:break-word;
     }
 
     .path{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:16px 18px;
+      margin:0 18px 14px;
+      padding:12px 14px;
+      border-radius:12px;
       background:var(--poomgo-soft);
-      border-left:5px solid var(--poomgo);
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
 
     .pathBadge{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:58px;
-      height:34px;
-      padding:0 12px;
-      border-radius:11px;
-      background:#FFFFFF;
-      border:1px solid #C9D8FF;
+      min-width:52px;
+      height:30px;
+      padding:0 10px;
+      border-radius:10px;
+      background:#fff;
+      border:1px solid #D5E1FF;
       color:var(--poomgo);
       font-size:12px;
       font-weight:900;
@@ -333,8 +328,8 @@
     }
 
     .pathText{
-      color:#102047;
-      font-size:17px;
+      color:#1E3A8A;
+      font-size:15px;
       font-weight:900;
       line-height:1.6;
       word-break:break-word;
@@ -351,16 +346,16 @@
     }
 
     .desc{
-      padding:18px;
+      padding:0 18px 18px;
       font-size:15px;
       font-weight:800;
-      color:#1E293B;
+      color:#1F2937;
       line-height:1.85;
       white-space:normal;
     }
 
     .imgWrap{
-      padding:18px;
+      padding:0 18px 18px;
       background:#fff;
     }
 
@@ -370,6 +365,7 @@
       border-radius:14px;
       border:1px solid var(--line);
       cursor:zoom-in;
+      background:#fff;
     }
 
     .imgHint{
@@ -399,16 +395,16 @@
       font-size:13px;
       font-weight:900;
       text-decoration:none;
-      box-shadow:0 6px 14px rgba(0,64,209,.16);
+      box-shadow:0 6px 14px rgba(0,64,209,.14);
     }
 
     .checklist{
-      padding:18px;
+      padding:0 18px 18px;
     }
 
     .checklist ul{
       margin:0;
-      padding-left:24px;
+      padding-left:22px;
     }
 
     .checklist li{
@@ -416,14 +412,14 @@
       color:#1F2937;
       font-size:15px;
       font-weight:800;
-      line-height:1.75;
+      line-height:1.8;
     }
 
     .stageFooter{
       padding:0 18px 18px;
       display:flex;
       justify-content:flex-end;
-      background:#FBFCFE;
+      background:#FCFDFE;
     }
 
     .nextBtn{
@@ -439,7 +435,7 @@
       font-size:14px;
       font-weight:900;
       cursor:pointer;
-      box-shadow:0 6px 14px rgba(22,163,74,.16);
+      box-shadow:0 6px 14px rgba(22,163,74,.14);
     }
 
     .empty{
@@ -526,13 +522,13 @@
         font-size:24px;
       }
       .blockTitle{
-        font-size:18px;
+        font-size:19px;
       }
       .path{
         align-items:flex-start;
       }
       .pathText{
-        font-size:15px;
+        font-size:14px;
       }
     }
   </style>
