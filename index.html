@@ -12,56 +12,38 @@
       --text:#111827;
       --muted:#6B7280;
       --line:#E5E7EB;
-
       --poomgo:#0040D1;
       --poomgo-weak:rgba(0,64,209,.08);
-
       --ok:#16A34A;
       --ok-weak:#ECFDF5;
       --ok-border:#BBF7D0;
-
-      --warn:#D97706;
-      --warn-weak:#FFF7ED;
-      --warn-border:#FED7AA;
-
-      --danger:#DC2626;
-      --danger-weak:#FEF2F2;
-      --danger-border:#FECACA;
-
       --shadow:0 10px 28px rgba(17,24,39,.08);
-      --shadow2:0 18px 40px rgba(17,24,39,.12);
-      --radius:22px;
+      --radius:20px;
     }
 
     *{ box-sizing:border-box; }
 
     body{
       margin:0;
-      font-family:Pretendard, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family:Pretendard, system-ui, -apple-system, sans-serif;
       background:var(--bg);
       color:var(--text);
     }
 
     .wrap{
-      max-width:980px;
+      max-width:1400px;
       margin:0 auto;
-      padding:28px 18px 56px;
+      padding:24px 18px 40px;
     }
 
     .top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      margin-bottom:14px;
-      flex-wrap:wrap;
+      margin-bottom:16px;
     }
 
     .title{
       margin:0;
       font-size:28px;
       font-weight:900;
-      letter-spacing:-.03em;
     }
 
     .sub{
@@ -69,21 +51,13 @@
       color:var(--muted);
       font-size:14px;
       font-weight:700;
-      line-height:1.55;
     }
 
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      color:#374151;
-      font-size:13px;
-      font-weight:800;
+    .layout{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:16px;
+      align-items:start;
     }
 
     .card{
@@ -93,17 +67,92 @@
       box-shadow:var(--shadow);
     }
 
-    .progressCard{
+    .sidebar{
+      padding:16px;
+      position:sticky;
+      top:16px;
+    }
+
+    .sidebarTitle{
+      margin:0 0 12px;
+      font-size:16px;
+      font-weight:900;
+    }
+
+    .stepNav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .stepNavItem{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+    }
+
+    .stepNavItem.done{
+      background:var(--ok-weak);
+      border-color:var(--ok-border);
+    }
+
+    .stepNavItem.current{
+      border-color:#BBD0FF;
+      background:#F8FBFF;
+    }
+
+    .stepNavTop{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:center;
+    }
+
+    .stepNavLabel{
+      font-size:13px;
+      font-weight:900;
+      line-height:1.5;
+    }
+
+    .stepNavMeta{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+      line-height:1.4;
+    }
+
+    .navBtn{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:10px;
+      padding:6px 10px;
+      font-size:12px;
+      font-weight:900;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .main{
       padding:18px;
+      min-height:500px;
+    }
+
+    .progressBox{
       margin-bottom:14px;
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
     }
 
     .progressHead{
       display:flex;
       justify-content:space-between;
-      align-items:center;
-      gap:10px;
+      gap:12px;
       margin-bottom:10px;
+      align-items:center;
       flex-wrap:wrap;
     }
 
@@ -114,8 +163,8 @@
     }
 
     .progressMeta{
-      color:var(--muted);
       font-size:13px;
+      color:var(--muted);
       font-weight:800;
     }
 
@@ -134,59 +183,28 @@
       transition:width .25s ease;
     }
 
-    .notice{
-      padding:16px;
-      margin-bottom:14px;
-      border:1px solid var(--warn-border);
-      background:var(--warn-weak);
+    .stageCard{
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .noticeTitle{
-      margin:0 0 6px;
-      color:#9A3412;
-      font-size:15px;
-      font-weight:900;
-    }
-
-    .noticeDesc{
-      margin:0;
-      color:#B45309;
-      font-size:13px;
-      font-weight:700;
-      line-height:1.55;
-    }
-
-    .steps{
+    .stageHead{
+      padding:18px 18px 14px;
+      border-bottom:1px solid var(--line);
       display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-
-    .step{
-      padding:16px;
-    }
-
-    .stepHeader{
-      display:flex;
-      align-items:flex-start;
       justify-content:space-between;
       gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .leftHead{
-      display:flex;
       align-items:flex-start;
-      gap:10px;
-      min-width:0;
-      flex:1 1 auto;
+      flex-wrap:wrap;
     }
 
     .badge{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:72px;
+      min-width:78px;
       height:30px;
       padding:0 12px;
       border-radius:999px;
@@ -194,111 +212,40 @@
       color:var(--poomgo);
       font-size:12px;
       font-weight:900;
-      white-space:nowrap;
-      line-height:1;
+      margin-bottom:8px;
     }
 
-    .badge.completed{
-      background:var(--ok-weak);
-      color:var(--ok);
-    }
-
-    .stepTitle{
+    .stageTitle{
       margin:0;
-      font-size:18px;
+      font-size:22px;
       font-weight:900;
-      letter-spacing:-.02em;
       line-height:1.35;
     }
 
-    .stepCode{
-      margin:4px 0 0;
+    .stageCode{
+      margin:6px 0 0;
       color:var(--muted);
       font-size:12px;
       font-weight:800;
     }
 
-    .actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
+    .doneBtn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      height:38px;
-      padding:0 14px;
+      height:40px;
+      padding:0 16px;
+      border:none;
       border-radius:12px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
+      background:var(--ok);
+      color:#fff;
       font-size:13px;
       font-weight:900;
-      line-height:1;
       cursor:pointer;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 18px rgba(17,24,39,.08);
-    }
-
-    .btn.primary{
-      background:var(--poomgo);
-      border-color:transparent;
-      color:#fff;
-    }
-
-    .btn.done{
-      background:var(--ok);
-      border-color:transparent;
-      color:#fff;
-    }
-
-    .stepBody{
-      margin-top:14px;
-      display:block;
-    }
-
-    .collapsed .stepBody{
-      display:none;
-    }
-
-    .collapsed .stepHeader{
-      margin-bottom:0;
-    }
-
-    .step.isLocked .stepBody{
-      display:none;
-    }
-
-    .step.isLocked .actions .btn{
-      opacity:.45;
-      pointer-events:none;
-    }
-
-    .lockHint{
-      display:none;
-      margin-top:10px;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#F9FAFB;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:800;
-      line-height:1.55;
-    }
-
-    .step.isLocked .lockHint{
-      display:block;
     }
 
     .blocks{
+      padding:16px;
       display:flex;
       flex-direction:column;
       gap:12px;
@@ -306,7 +253,7 @@
 
     .block{
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:16px;
       overflow:hidden;
       background:#fff;
     }
@@ -371,8 +318,8 @@
       margin:0 14px 14px;
       padding:12px 14px;
       border-radius:14px;
-      border:1px solid var(--danger-border);
-      background:var(--danger-weak);
+      border:1px solid #FECACA;
+      background:#FEF2F2;
       color:#991B1B;
       font-size:13px;
       font-weight:900;
@@ -381,7 +328,6 @@
 
     .imgWrap{
       padding:14px;
-      background:#fff;
     }
 
     .imgWrap img{
@@ -403,8 +349,22 @@
     .buttonArea{
       padding:0 14px 14px;
       display:flex;
-      flex-wrap:wrap;
       gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .linkBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      border-radius:12px;
+      background:var(--poomgo);
+      color:#fff;
+      font-size:13px;
+      font-weight:900;
+      text-decoration:none;
     }
 
     .checklist{
@@ -424,12 +384,21 @@
       line-height:1.6;
     }
 
+    .empty{
+      padding:40px 20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+    }
+
     .finalMsg{
-      display:none;
       margin-top:14px;
       padding:18px;
       border:1px solid var(--ok-border);
       background:var(--ok-weak);
+      border-radius:16px;
+      display:none;
     }
 
     .finalMsg p{
@@ -438,14 +407,6 @@
       font-size:15px;
       font-weight:900;
       line-height:1.6;
-    }
-
-    .empty{
-      padding:18px;
-      color:var(--muted);
-      font-size:14px;
-      font-weight:800;
-      text-align:center;
     }
 
     .modalBack{
@@ -465,8 +426,6 @@
       overflow:auto;
       background:#fff;
       border-radius:22px;
-      box-shadow:var(--shadow2);
-      border:1px solid rgba(255,255,255,.25);
     }
 
     .modalHead{
@@ -479,7 +438,6 @@
       padding:14px 16px;
       background:#fff;
       border-bottom:1px solid var(--line);
-      z-index:2;
     }
 
     .modalTitle{
@@ -499,48 +457,44 @@
       border:1px solid var(--line);
     }
 
-    @media (max-width: 640px){
-      .title{ font-size:22px; }
-      .stepTitle{ font-size:16px; }
-      .path{ flex-direction:column; }
-      .badge{ min-width:auto; }
+    @media (max-width: 980px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+      .sidebar{
+        position:static;
+      }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="top">
-      <div>
-        <h1 class="title" id="pageTitle">온보딩 가이드</h1>
-        <p class="sub" id="pageSubtitle">데이터를 불러오는 중입니다.</p>
-      </div>
-      <div class="chip" id="clientChip">고객사 확인 중</div>
+      <h1 class="title" id="pageTitle">온보딩 가이드</h1>
+      <p class="sub" id="pageSubtitle">데이터를 불러오는 중입니다.</p>
     </div>
 
-    <div class="card progressCard">
-      <div class="progressHead">
-        <p class="progressTitle">진행률</p>
-        <div class="progressMeta" id="progressMeta">0 / 0 단계 완료</div>
-      </div>
-      <div class="bar">
-        <div class="barFill" id="barFill"></div>
-      </div>
-    </div>
+    <div class="layout">
+      <aside class="card sidebar">
+        <p class="sidebarTitle" id="clientNameBox">고객사 확인 중</p>
+        <div class="stepNav" id="stepNav"></div>
+      </aside>
 
-    <div class="card notice">
-      <p class="noticeTitle">안내</p>
-      <p class="noticeDesc">
-        각 단계를 확인한 뒤 <b>완료</b> 버튼을 눌러 다음 단계로 이동해주세요.
-        새로고침해도 진행 상태는 이 브라우저에 저장됩니다.
-      </p>
-    </div>
+      <main class="card main">
+        <div class="progressBox">
+          <div class="progressHead">
+            <p class="progressTitle">진행률</p>
+            <div class="progressMeta" id="progressMeta">0 / 0 단계 완료</div>
+          </div>
+          <div class="bar"><div class="barFill" id="barFill"></div></div>
+        </div>
 
-    <div class="steps" id="stepsContainer">
-      <div class="card empty">가이드를 불러오는 중입니다.</div>
-    </div>
+        <div id="currentStageArea"></div>
 
-    <div class="card finalMsg" id="finalMsg">
-      <p>✅ 모든 온보딩 단계를 완료했습니다. 담당자에게 완료 여부를 공유해주세요.</p>
+        <div class="finalMsg" id="finalMsg">
+          <p>✅ 모든 온보딩 단계를 완료했습니다. 담당자에게 완료 여부를 공유해주세요.</p>
+        </div>
+      </main>
     </div>
   </div>
 
@@ -548,7 +502,7 @@
     <div class="modal">
       <div class="modalHead">
         <p class="modalTitle" id="zoomTitle">이미지 확대</p>
-        <button class="btn" id="zoomClose" type="button">닫기</button>
+        <button class="navBtn" id="zoomClose" type="button">닫기</button>
       </div>
       <div class="modalBody">
         <img class="zoomImg" id="zoomImg" src="" alt="zoom" />
@@ -557,17 +511,12 @@
   </div>
 
   <script>
-    /*************************************************
-     * 설정
-     *************************************************/
     const APPS_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzJHhyl4gwS6R7MXtWKuFbTMZE0-DOwyGPA73l19dJD_SCF7S2mtyazd_1OmVvAoCJV/exec';
 
-    /*************************************************
-     * 전역 상태
-     *************************************************/
     let payload = null;
     let groupedSteps = [];
     let completedSteps = [];
+    let viewingStepNo = null;
 
     const params = new URLSearchParams(location.search);
     const clientCode = params.get('client') || '';
@@ -594,21 +543,19 @@
       return completedSteps.includes(stepNo);
     }
 
-    function isLocked(stepNo) {
-      return stepNo > 1 && !isCompleted(stepNo - 1);
+    function getCurrentStepNo() {
+      const next = groupedSteps.find(step => !isCompleted(step.stepNo));
+      return next ? next.stepNo : null;
     }
 
-    /*************************************************
-     * JSONP 로딩
-     *************************************************/
+    function getDisplayStepNo() {
+      if (viewingStepNo) return viewingStepNo;
+      return getCurrentStepNo();
+    }
+
     function loadData() {
       if (!clientCode) {
-        showEmpty('고객사 코드가 없습니다. URL 뒤에 ?client=고객사코드 형태로 접속해주세요.');
-        return;
-      }
-
-      if (!APPS_SCRIPT_WEBAPP_URL || APPS_SCRIPT_WEBAPP_URL.indexOf('여기에_앱스크립트_웹앱_URL_넣기') > -1) {
-        showEmpty('Apps Script 웹앱 URL이 설정되지 않았습니다.');
+        showMainEmpty('고객사 코드가 없습니다. URL 뒤에 ?client=고객사코드 형태로 접속해주세요.');
         return;
       }
 
@@ -616,25 +563,20 @@
         payload = data;
         loadProgress();
         buildSteps();
-        renderPage();
+        renderAll();
       };
 
-      const src =
+      const script = document.createElement('script');
+      script.src =
         APPS_SCRIPT_WEBAPP_URL +
         '?mode=data&client=' + encodeURIComponent(clientCode) +
         '&callback=renderOnboardingData';
-
-      const script = document.createElement('script');
-      script.src = src;
       script.onerror = function() {
-        showEmpty('가이드 데이터를 불러오지 못했습니다. Apps Script 배포 상태와 URL을 확인해주세요.');
+        showMainEmpty('가이드 데이터를 불러오지 못했습니다. Apps Script URL과 배포 상태를 확인해주세요.');
       };
       document.body.appendChild(script);
     }
 
-    /*************************************************
-     * 데이터 가공
-     *************************************************/
     function buildSteps() {
       const items = (payload && payload.guideItems) ? payload.guideItems : [];
       const map = new Map();
@@ -654,69 +596,91 @@
       groupedSteps = Array.from(map.values()).sort((a, b) => a.stepNo - b.stepNo);
     }
 
-    /*************************************************
-     * 렌더링
-     *************************************************/
-    function renderPage() {
+    function renderAll() {
       const client = payload && payload.client ? payload.client : null;
 
       document.title = client && client.pageTitle ? client.pageTitle : '온보딩 가이드';
       document.getElementById('pageTitle').textContent = client && client.pageTitle ? client.pageTitle : '온보딩 가이드';
       document.getElementById('pageSubtitle').textContent = client && client.subtitle ? client.subtitle : '아래 순서대로 진행해주세요.';
-      document.getElementById('clientChip').textContent = client && client.clientName ? client.clientName : '고객사';
+      document.getElementById('clientNameBox').textContent = client && client.clientName ? client.clientName : '고객사';
 
-      renderSteps();
+      renderSidebar();
+      renderCurrentStage();
       renderProgress();
       renderFinalMessage();
     }
 
-    function renderSteps() {
-      const container = document.getElementById('stepsContainer');
+    function renderSidebar() {
+      const nav = document.getElementById('stepNav');
 
       if (!groupedSteps.length) {
-        showEmpty('표시할 가이드 단계가 없습니다.');
+        nav.innerHTML = '<div class="stepNavItem"><div class="stepNavLabel">단계 정보 없음</div></div>';
         return;
       }
 
-      container.innerHTML = groupedSteps.map(step => {
-        const blocksHtml = step.blocks
-          .sort((a, b) => a.blockOrder - b.blockOrder)
-          .map(renderBlockHtml)
-          .join('');
+      const currentStepNo = getCurrentStepNo();
+      const displayStepNo = getDisplayStepNo();
+
+      nav.innerHTML = groupedSteps.map(step => {
+        const done = isCompleted(step.stepNo);
+        const current = !done && step.stepNo === currentStepNo;
+        const viewing = step.stepNo === displayStepNo;
 
         return `
-          <section class="card step ${isLocked(step.stepNo) ? 'isLocked' : ''}" id="step${step.stepNo}" data-step="${step.stepNo}">
-            <div class="stepHeader">
-              <div class="leftHead">
-                <span class="badge ${isCompleted(step.stepNo) ? 'completed' : ''}" id="badge${step.stepNo}">
-                  ${isCompleted(step.stepNo) ? '✔ STEP ' + step.stepNo : 'STEP ' + step.stepNo}
-                </span>
-                <div>
-                  <p class="stepTitle">${escapeHtml(step.stepName)}</p>
-                  <p class="stepCode">${escapeHtml(step.stepCode)}</p>
-                </div>
+          <div class="stepNavItem ${done ? 'done' : ''} ${current || viewing ? 'current' : ''}">
+            <div class="stepNavTop">
+              <div class="stepNavLabel">
+                ${done ? '✅' : (current ? '🔵' : '⚪')} STEP${step.stepNo} ${escapeHtml(step.stepName)}
               </div>
-
-              <div class="actions">
-                <button class="btn" id="toggle${step.stepNo}" type="button" style="${isCompleted(step.stepNo) ? '' : 'display:none;'}">
-                  보기
-                </button>
-                <button class="btn done" id="done${step.stepNo}" type="button" style="${isCompleted(step.stepNo) ? 'display:none;' : ''}">
-                  완료
-                </button>
-              </div>
+              ${done
+                ? `<button class="navBtn" type="button" data-view-step="${step.stepNo}">보기</button>`
+                : (current
+                    ? `<button class="navBtn" type="button" data-view-step="${step.stepNo}">진행중</button>`
+                    : '')
+              }
             </div>
-
-            <div class="lockHint">이전 단계를 완료하면 확인할 수 있습니다.</div>
-
-            <div class="stepBody">
-              <div class="blocks">
-                ${blocksHtml}
-              </div>
-            </div>
-          </section>
+            <div class="stepNavMeta">${escapeHtml(step.stepCode)}</div>
+          </div>
         `;
       }).join('');
+    }
+
+    function renderCurrentStage() {
+      const area = document.getElementById('currentStageArea');
+      const stepNo = getDisplayStepNo();
+
+      if (!stepNo) {
+        area.innerHTML = '<div class="empty">현재 표시할 단계가 없습니다.</div>';
+        return;
+      }
+
+      const step = groupedSteps.find(s => s.stepNo === stepNo);
+      if (!step) {
+        area.innerHTML = '<div class="empty">단계 정보를 찾을 수 없습니다.</div>';
+        return;
+      }
+
+      const currentStepNo = getCurrentStepNo();
+      const isReplay = isCompleted(step.stepNo) && step.stepNo !== currentStepNo;
+
+      area.innerHTML = `
+        <section class="stageCard">
+          <div class="stageHead">
+            <div>
+              <div class="badge">${isCompleted(step.stepNo) ? '완료 STEP ' + step.stepNo : 'STEP ' + step.stepNo}</div>
+              <p class="stageTitle">${escapeHtml(step.stepName)}</p>
+              <p class="stageCode">${escapeHtml(step.stepCode)} ${isReplay ? '· 완료된 단계 다시보기' : ''}</p>
+            </div>
+            ${!isCompleted(step.stepNo)
+              ? `<button class="doneBtn" type="button" id="completeCurrentStepBtn" data-step="${step.stepNo}">완료</button>`
+              : ''
+            }
+          </div>
+          <div class="blocks">
+            ${step.blocks.sort((a,b) => a.blockOrder - b.blockOrder).map(renderBlockHtml).join('')}
+          </div>
+        </section>
+      `;
     }
 
     function renderBlockHtml(block) {
@@ -766,8 +730,8 @@
       const buttonHtml = buttonText ? `
         <div class="buttonArea">
           ${buttonUrl
-            ? `<a class="btn primary" href="${escapeAttr(buttonUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(buttonText)}</a>`
-            : `<button class="btn primary" type="button" disabled>${escapeHtml(buttonText)}</button>`
+            ? `<a class="linkBtn" href="${escapeAttr(buttonUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(buttonText)}</a>`
+            : ''
           }
         </div>
       ` : '';
@@ -780,13 +744,11 @@
         </div>
       ` : '';
 
-      const normalDescHtml = type === '체크리스트' ? '' : descHtml;
-
       return `
         <div class="block">
           ${headHtml}
           ${pathHtml}
-          ${type === '체크리스트' ? checklistHtml : normalDescHtml}
+          ${type === '체크리스트' ? checklistHtml : descHtml}
           ${highlightHtml}
           ${imageHtml}
           ${buttonHtml}
@@ -809,37 +771,6 @@
       document.getElementById('finalMsg').style.display = (total > 0 && done === total) ? 'block' : 'none';
     }
 
-    function showEmpty(message) {
-      document.getElementById('stepsContainer').innerHTML = `<div class="card empty">${escapeHtml(message)}</div>`;
-    }
-
-    /*************************************************
-     * 이벤트
-     *************************************************/
-    document.addEventListener('click', function(e) {
-      const img = e.target.closest('img[data-zoom]');
-      if (img) {
-        const stepEl = img.closest('.step');
-        if (stepEl && stepEl.classList.contains('isLocked')) return;
-        openZoom(img.getAttribute('data-zoom'), img.getAttribute('data-title'));
-        return;
-      }
-
-      const doneBtn = e.target.closest('button[id^="done"]');
-      if (doneBtn) {
-        const stepNo = Number(doneBtn.id.replace('done', ''));
-        if (!stepNo || isLocked(stepNo) || isCompleted(stepNo)) return;
-        completeStep(stepNo);
-        return;
-      }
-
-      const toggleBtn = e.target.closest('button[id^="toggle"]');
-      if (toggleBtn) {
-        const stepNo = Number(toggleBtn.id.replace('toggle', ''));
-        toggleStep(stepNo);
-      }
-    });
-
     function completeStep(stepNo) {
       if (!completedSteps.includes(stepNo)) {
         completedSteps.push(stepNo);
@@ -847,38 +778,41 @@
         saveProgress();
       }
 
-      const stepEl = document.getElementById('step' + stepNo);
-      if (stepEl) {
-        stepEl.classList.add('collapsed');
-      }
+      viewingStepNo = null;
+      renderAll();
 
-      rerenderAfterStateChange();
-
-      const next = document.getElementById('step' + (stepNo + 1));
-      if (next) {
-        next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const nextStepNo = getCurrentStepNo();
+      if (nextStepNo) {
+        const main = document.querySelector('.main');
+        if (main) main.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
-    function toggleStep(stepNo) {
-      const stepEl = document.getElementById('step' + stepNo);
-      const toggleBtn = document.getElementById('toggle' + stepNo);
-      if (!stepEl || !toggleBtn) return;
-
-      const collapsed = stepEl.classList.contains('collapsed');
-      stepEl.classList.toggle('collapsed', !collapsed);
-      toggleBtn.textContent = collapsed ? '접기' : '보기';
+    function showMainEmpty(message) {
+      document.getElementById('currentStageArea').innerHTML = '<div class="empty">' + escapeHtml(message) + '</div>';
     }
 
-    function rerenderAfterStateChange() {
-      renderSteps();
-      renderProgress();
-      renderFinalMessage();
-    }
+    document.addEventListener('click', function(e) {
+      const viewBtn = e.target.closest('[data-view-step]');
+      if (viewBtn) {
+        viewingStepNo = Number(viewBtn.getAttribute('data-view-step')) || null;
+        renderAll();
+        return;
+      }
 
-    /*************************************************
-     * 이미지 확대
-     *************************************************/
+      const completeBtn = e.target.closest('#completeCurrentStepBtn');
+      if (completeBtn) {
+        const stepNo = Number(completeBtn.getAttribute('data-step'));
+        if (stepNo) completeStep(stepNo);
+        return;
+      }
+
+      const img = e.target.closest('img[data-zoom]');
+      if (img) {
+        openZoom(img.getAttribute('data-zoom'), img.getAttribute('data-title'));
+      }
+    });
+
     const zoomBack = document.getElementById('zoomBack');
     const zoomImg = document.getElementById('zoomImg');
     const zoomTitle = document.getElementById('zoomTitle');
@@ -904,14 +838,9 @@
     });
 
     window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeZoom();
-      }
+      if (e.key === 'Escape') closeZoom();
     });
 
-    /*************************************************
-     * 유틸
-     *************************************************/
     function escapeHtml(str) {
       return String(str == null ? '' : str)
         .replace(/&/g, '&amp;')
@@ -925,9 +854,6 @@
       return escapeHtml(str);
     }
 
-    /*************************************************
-     * 시작
-     *************************************************/
     loadData();
   </script>
 </body>
