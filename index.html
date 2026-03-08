@@ -910,21 +910,21 @@
 
       const methodHtml = path ? `
         <div class="method ${platformClass}">
-          <span class="methodLabel">진행 방법</span>
+          <span class="methodLabel"></span>
           <div class="methodText">${renderRichContent(path)}</div>
         </div>
       ` : '';
 
       const tipHtml = highlight ? `
         <div class="tip">
-          <span class="tipBadge">💡 TIP</span>
+          <span class="tipBadge">💡TIP</span>
           <div class="tipText">${renderRichContent(highlight)}</div>
         </div>
       ` : '';
 
       const descHtml = desc ? `
         <div class="descBox">
-          <span class="descLabel">설명</span>
+          <span class="descLabel"></span>
           <div class="descText">${renderRichContent(desc)}</div>
         </div>
       ` : '';
