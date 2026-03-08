@@ -7,30 +7,30 @@
 
   <style>
     :root{
-      --bg:#F7F8FA;
+      --bg:#F6F7FB;
       --card:#FFFFFF;
       --text:#111827;
       --muted:#6B7280;
-      --line:#E5E7EB;
+      --line:#E7ECF3;
 
-      --poomgo:#0040D1;
-      --poomgo-weak:#EEF4FF;
+      --primary:#0040D1;
+      --primary-weak:#EEF4FF;
+      --primary-soft:#F8FAFF;
 
       --ok:#16A34A;
       --ok-weak:#ECFDF5;
       --ok-border:#BBF7D0;
 
-      --tip-bg:#F3F8FF;
-      --tip-border:#D6E7FF;
-      --tip-badge-bg:#E8F1FF;
+      --tip-line:#60A5FA;
+      --tip-badge-bg:#EEF4FF;
       --tip-badge-text:#1D4ED8;
       --tip-text:#1E3A8A;
 
-      --path-line:#DCE6F8;
-      --path-text:#334155;
-      --path-label:#0040D1;
+      --method-line:#D9E2F2;
+      --method-label:#0040D1;
+      --method-text:#334155;
 
-      --shadow:0 6px 18px rgba(15,23,42,.05);
+      --shadow:0 8px 24px rgba(15,23,42,.05);
       --radius:18px;
     }
 
@@ -66,7 +66,7 @@
       color:var(--muted);
       font-size:14px;
       font-weight:700;
-      line-height:1.65;
+      line-height:1.7;
     }
 
     .progressInline{
@@ -91,6 +91,7 @@
       margin:0;
       font-size:15px;
       font-weight:900;
+      color:#111827;
     }
 
     .progressMeta{
@@ -152,6 +153,7 @@
       border-radius:14px;
       padding:12px;
       background:#fff;
+      transition:.15s ease;
     }
 
     .stepNavItem.done{
@@ -224,8 +226,8 @@
       height:34px;
       padding:0 12px;
       border-radius:999px;
-      background:var(--poomgo-weak);
-      color:var(--poomgo);
+      background:var(--primary-weak);
+      color:var(--primary);
       font-size:12px;
       font-weight:900;
       flex:0 0 auto;
@@ -256,7 +258,7 @@
     }
 
     .blockHead{
-      padding:20px 20px 12px;
+      padding:20px 20px 10px;
       background:#fff;
     }
 
@@ -269,30 +271,33 @@
       color:#111827;
     }
 
-.tip{
-  margin:0 20px 16px;
-  padding:16px 18px;
-  border-radius:16px;
-  background:#ffffff;
-  border-left:4px solid #3B82F6;
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-}
+    .tip{
+      margin:0 20px 16px;
+      padding:16px 18px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid #E8EEF8;
+      border-left:4px solid var(--tip-line);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
 
-.tipBadge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:26px;
-  padding:0 10px;
-  border-radius:999px;
-  background:#EEF4FF;
-  color:#1D4ED8;
-  font-size:12px;
-  font-weight:900;
-  flex:0 0 auto;
-}
+    .tipBadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:64px;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      background:var(--tip-badge-bg);
+      color:var(--tip-badge-text);
+      font-size:12px;
+      font-weight:900;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
 
     .tipText{
       color:var(--tip-text);
@@ -302,39 +307,38 @@
       word-break:break-word;
     }
 
-    .path{
-  margin:0 20px 16px;
-  padding:14px 0;
-  border-top:1px solid var(--path-line);
-  border-bottom:1px solid var(--path-line);
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-}
+    .method{
+      margin:0 20px 16px;
+      padding:14px 0;
+      border-top:1px solid var(--method-line);
+      border-bottom:1px solid var(--method-line);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
 
-.pathBadge{
-  color:var(--path-label);
-  font-size:13px;
-  font-weight:900;
-  line-height:1.7;
-  flex:0 0 auto;
-  padding-top:1px;
-  white-space:nowrap;
-}
+    .methodLabel{
+      color:var(--method-label);
+      font-size:13px;
+      font-weight:900;
+      line-height:1.75;
+      flex:0 0 auto;
+      white-space:nowrap;
+    }
 
-.pathText{
-  color:var(--path-text);
-  font-size:15px;
-  font-weight:800;
-  line-height:1.7;
-  word-break:break-word;
-}
+    .methodText{
+      color:var(--method-text);
+      font-size:15px;
+      font-weight:800;
+      line-height:1.75;
+      word-break:break-word;
+    }
 
-    .pathText a,
+    .methodText a,
     .desc a,
     .tipText a,
     .checklist a{
-      color:var(--poomgo);
+      color:var(--primary);
       font-weight:900;
       text-decoration:underline;
       word-break:break-all;
@@ -383,11 +387,11 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:220px;
-      height:50px;
+      min-width:240px;
+      min-height:52px;
       padding:0 22px;
       border-radius:14px;
-      background:var(--poomgo);
+      background:var(--primary);
       color:#fff;
       font-size:15px;
       font-weight:900;
@@ -424,8 +428,8 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:240px;
-      height:52px;
+      min-width:260px;
+      min-height:54px;
       padding:0 24px;
       border:none;
       border-radius:14px;
@@ -523,11 +527,11 @@
       .blockTitle{
         font-size:19px;
       }
-      .path{
+      .method{
         flex-direction:column;
-        gap:6px;
+        gap:4px;
       }
-      .pathText{
+      .methodText{
         font-size:14px;
       }
       .linkBtn,
@@ -773,10 +777,10 @@
         </div>
       ` : '';
 
-      const pathHtml = path ? `
-        <div class="path">
-          <span class="pathBadge">경로</span>
-          <div class="pathText">${path}</div>
+      const methodHtml = path ? `
+        <div class="method">
+          <span class="methodLabel">진행방법</span>
+          <div class="methodText">${path}</div>
         </div>
       ` : '';
 
@@ -822,7 +826,7 @@
         <div class="block">
           ${headHtml}
           ${tipHtml}
-          ${pathHtml}
+          ${methodHtml}
           ${type === '체크리스트' ? checklistHtml : descHtml}
           ${imageHtml}
           ${buttonHtml}
