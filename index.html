@@ -215,6 +215,29 @@
       line-height:1.8;
     }
 
+    .packingGuideBox{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid #E5EAF2;
+      border-radius:14px;
+      background:#FAFBFC;
+    }
+
+    .packingGuideHead{
+      margin-bottom:10px;
+      font-size:14px;
+      font-weight:900;
+      color:#111827;
+    }
+
+    .packingGuideImg{
+      width:100%;
+      display:block;
+      border-radius:12px;
+      border:1px solid #E5E7EB;
+      background:#fff;
+    }
+
     .progressInline{
       margin-top:14px;
       padding:14px 16px;
@@ -473,7 +496,7 @@
     .imgHint{
       margin:8px 0 0;
       text-align:right;
-      color:var(--muted);
+      color:#6B7280;
       font-size:12px;
       font-weight:700;
     }
@@ -759,21 +782,19 @@
       <p class="sub" id="pageSubtitle">데이터를 불러오는 중입니다.</p>
     </div>
 
-    <!-- 첫 진입 카드 -->
     <section class="introCard" id="introCard">
-      <h2 class="introTitle">물류사 질의 사항 입력</h2>
+      <h2 class="introTitle">물류사 질의 사항 최종 확인</h2>
       <p class="introDesc">
-        온보딩 진행 전 기본 운영 정보를 먼저 입력해주세요.<br>
-        제출 완료 후 N배송 세팅 가이드를 확인할 수 있습니다.
+        본 항목은 네이버에 제출한 내용을 품고에서 최종 확인하기 위한 절차입니다.<br>
+        네이버에 입력한 정보와 동일하게 작성해주세요.
       </p>
       <div class="actionRow">
         <button type="button" class="primaryBtn" id="openInquiryBtn">물류사 질의 사항 입력하러 가기</button>
       </div>
     </section>
 
-    <!-- 입력 폼 -->
     <section class="formCard hidden" id="inquiryFormCard">
-      <h2 class="formTitle">물류사 질의 사항 입력</h2>
+      <h2 class="formTitle">물류사 질의 사항 최종 확인</h2>
 
       <div class="formGrid">
         <div class="field full">
@@ -813,10 +834,21 @@
             <option value="에어캡">에어캡</option>
             <option value="버블페이퍼">버블페이퍼</option>
           </select>
+
           <div class="helpText">
             * 기본 : 박스 내 위 아래 에어캡이 1장씩 깔린 상태로 출고됩니다.<br>
             * 에어캡 : 제품을 에어캡으로 포장하여 박스에 포장됩니다.<br>
             * 버블페이퍼 : 제품을 버블페이퍼로 포장하여 박스에 포장됩니다.
+          </div>
+
+          <div class="packingGuideBox">
+            <div class="packingGuideHead">포장 방법 예시</div>
+            <img
+              id="packingGuideImg"
+              src=""
+              alt="포장 방법 예시"
+              class="packingGuideImg"
+            />
           </div>
         </div>
 
@@ -840,7 +872,6 @@
       </div>
     </section>
 
-    <!-- 실제 가이드 -->
     <section class="hidden" id="guideSection">
       <div class="progressInline">
         <div class="progressHead">
@@ -867,7 +898,6 @@
     </section>
   </div>
 
-  <!-- 이미지 확대 -->
   <div class="modalBack" id="zoomBack">
     <div class="modal">
       <div class="modalHead">
@@ -880,7 +910,6 @@
     </div>
   </div>
 
-  <!-- 제출 전 확인 팝업 -->
   <div class="modalBack" id="confirmBack">
     <div class="confirmModal">
       <div class="modalHead">
@@ -902,6 +931,7 @@
 
   <script>
     const APPS_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzJHhyl4gwS6R7MXtWKuFbTMZE0-DOwyGPA73l19dJD_SCF7S2mtyazd_1OmVvAoCJV/exec';
+    const PACKING_GUIDE_IMAGE_URL = 'https://drive.google.com/file/d/1EKpe0-VyNOZd9rPsTDXKR_OQONMsFBbY/view?usp=drive_link';
 
     let payload = null;
     let groupedSteps = [];
@@ -961,6 +991,8 @@
         alert('고객사 코드가 없습니다.');
         return;
       }
+
+      document.getElementById('packingGuideImg').src = PACKING_GUIDE_IMAGE_URL;
 
       window.renderOnboardingData = function(data) {
         payload = data;
@@ -1238,21 +1270,21 @@
 
           ${path ? `
             <div class="method ${platformClass}">
-              <span class="methodLabel">진행 방법</span>
+              <span class="methodLabel"></span>
               <div class="methodText">${renderRichContent(path)}</div>
             </div>
           ` : ''}
 
           ${highlight ? `
             <div class="tip">
-              <span class="tipBadge">💡 TIP</span>
+              <span class="tipBadge">💡TIP</span>
               <div class="tipText">${renderRichContent(highlight)}</div>
             </div>
           ` : ''}
 
           ${desc ? `
             <div class="descBox">
-              <span class="descLabel">설명</span>
+              <span class="descLabel"></span>
               <div class="descText">${renderRichContent(desc)}</div>
             </div>
           ` : ''}
