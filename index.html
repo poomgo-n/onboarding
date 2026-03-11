@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>품고 셀프 온보딩</title>
+  <title>N배송 설정 가이드</title>
 
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
@@ -11,32 +11,36 @@
 
   <style>
     :root{
-      --bg:#f5f7fb;
+      --bg:#f4f6f8;
       --card:#ffffff;
       --text:#111827;
       --muted:#6b7280;
-      --line:#e5e7eb;
+      --line:#e7ebf0;
       --primary:#03C75A;
-      --primary-soft:#ecfdf3;
-      --primary-deep:#02b350;
+      --primary-soft:#effaf4;
+      --primary-soft-2:#f7fcf9;
+      --primary-deep:#00b050;
       --soft:#f8fafc;
+      --soft-blue:#edf4fb;
       --warn-bg:#fff7ed;
       --warn-line:#fed7aa;
       --warn-text:#9a3412;
       --danger-bg:#fff1f2;
       --danger-line:#fecdd3;
       --danger-text:#be123c;
-      --shadow:0 10px 30px rgba(15,23,42,.06);
-      --radius-xl:22px;
-      --radius-lg:16px;
-      --radius-md:12px;
+      --shadow:0 10px 30px rgba(15,23,42,.05);
+      --shadow-soft:0 6px 18px rgba(15,23,42,.04);
+      --radius-2xl:28px;
+      --radius-xl:24px;
+      --radius-lg:18px;
+      --radius-md:14px;
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;height:100%}
     body{
       font-family:"Pretendard Variable","Pretendard",system-ui,sans-serif;
-      background:var(--bg);
+      background:linear-gradient(180deg,#f7f9fb 0%, #f2f5f8 100%);
       color:var(--text);
       line-height:1.6;
     }
@@ -48,11 +52,11 @@
     .app{
       width:100%;
       min-height:100vh;
-      padding:16px;
+      padding:20px;
     }
 
     .topbar{
-      margin-bottom:16px;
+      margin-bottom:18px;
       padding:0 4px;
     }
 
@@ -60,19 +64,19 @@
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:8px 12px;
+      padding:8px 13px;
       border-radius:999px;
       background:var(--primary-soft);
       color:var(--primary-deep);
       font-size:13px;
       font-weight:800;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
 
     h1{
-      margin:0 0 6px;
-      font-size:30px;
-      line-height:1.2;
+      margin:0 0 8px;
+      font-size:32px;
+      line-height:1.18;
       letter-spacing:-.03em;
     }
 
@@ -85,53 +89,43 @@
     .layout{
       display:grid;
       grid-template-columns:300px minmax(0,1fr);
-      gap:16px;
+      gap:18px;
       min-height:calc(100vh - 110px);
     }
 
     .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius-xl);
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(255,255,255,.88);
+      border-radius:var(--radius-2xl);
       box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
     }
 
     .sidebar{
       display:flex;
       flex-direction:column;
-      height:calc(100vh - 32px);
+      height:calc(100vh - 40px);
       position:sticky;
-      top:16px;
-      padding:16px;
+      top:20px;
+      padding:18px;
     }
 
-    .sidebar-header{
-      flex:0 0 auto;
-    }
-
+    .sidebar-header{flex:0 0 auto}
     .sidebar-steps{
       flex:1;
       overflow-y:auto;
-      margin-top:10px;
-      margin-bottom:10px;
+      margin-top:12px;
+      margin-bottom:12px;
       padding-right:4px;
       scroll-behavior:smooth;
     }
+    .sidebar-footer{flex:0 0 auto;margin-top:auto}
 
-    .sidebar-footer{
-      flex:0 0 auto;
-      margin-top:auto;
-    }
-
-    .sidebar-steps::-webkit-scrollbar{
-      width:6px;
-    }
-
+    .sidebar-steps::-webkit-scrollbar{width:6px}
     .sidebar-steps::-webkit-scrollbar-thumb{
-      background:#e5e7eb;
-      border-radius:6px;
+      background:#dbe2ea;
+      border-radius:999px;
     }
-
     .sidebar-steps::-webkit-scrollbar-track{
       background:transparent;
     }
@@ -146,7 +140,8 @@
 
     .side-title{
       font-size:17px;
-      font-weight:800;
+      font-weight:900;
+      letter-spacing:-.02em;
     }
 
     .progress{
@@ -167,9 +162,15 @@
 
     .step-item{
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:18px;
       overflow:hidden;
       background:#fff;
+      transition:all .2s ease;
+    }
+
+    .step-item.active{
+      border-color:#d6efdf;
+      box-shadow:0 8px 24px rgba(3,199,90,.08);
     }
 
     .step-header{
@@ -185,19 +186,20 @@
     }
 
     .step-item.active .step-header{
-      background:linear-gradient(180deg,#fbfffd 0%, #f3fff8 100%);
+      background:linear-gradient(180deg,#fbfffd 0%, #f5fff9 100%);
     }
 
     .step-num{
-      width:34px;
-      height:34px;
-      border-radius:11px;
+      width:36px;
+      height:36px;
+      border-radius:12px;
       display:grid;
       place-items:center;
       font-size:14px;
       font-weight:800;
       background:#f3f4f6;
-      flex:0 0 34px;
+      color:#374151;
+      flex:0 0 36px;
     }
 
     .step-item.active .step-num{
@@ -237,7 +239,7 @@
     .dot.current{background:#2563eb}
 
     .chev{
-      color:#6b7280;
+      color:#94a3b8;
       transition:transform .2s ease;
       font-size:18px;
     }
@@ -247,8 +249,8 @@
     .step-body{
       display:none;
       padding:10px 14px 14px;
-      border-top:1px solid var(--line);
-      background:#fcfcfd;
+      border-top:1px solid #f0f3f6;
+      background:#fcfdff;
     }
 
     .step-item.active .step-body{display:block}
@@ -263,21 +265,21 @@
       display:flex;
       gap:8px;
       font-size:13px;
-      color:#374151;
+      color:#475569;
       word-break:break-word;
     }
 
     .side-note{
-      padding:12px 13px;
-      border-radius:14px;
-      background:#f9fafb;
+      padding:13px 14px;
+      border-radius:16px;
+      background:#f8fafc;
       border:1px solid var(--line);
       color:var(--muted);
       font-size:12px;
     }
 
     .main{
-      padding:24px 28px;
+      padding:28px;
       min-width:0;
     }
 
@@ -285,9 +287,10 @@
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
-      gap:12px;
+      gap:16px;
       margin-bottom:18px;
       flex-wrap:wrap;
+      padding:4px 0 2px;
     }
 
     .step-chip{
@@ -300,13 +303,13 @@
       color:#374151;
       font-size:13px;
       font-weight:800;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
 
     .hero h2{
-      margin:0 0 8px;
-      font-size:28px;
-      line-height:1.2;
+      margin:0 0 10px;
+      font-size:30px;
+      line-height:1.18;
       letter-spacing:-.03em;
       word-break:keep-all;
     }
@@ -326,110 +329,132 @@
 
     .btn{
       border:none;
-      padding:12px 15px;
-      border-radius:12px;
+      padding:12px 16px;
+      border-radius:14px;
       font-weight:800;
       cursor:pointer;
       text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      transition:all .18s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
     }
 
     .btn.secondary{
       background:#fff;
       border:1px solid var(--line);
       color:#111827;
+      box-shadow:var(--shadow-soft);
     }
 
     .btn.primary{
       background:var(--primary);
       color:#fff;
+      box-shadow:0 10px 20px rgba(3,199,90,.18);
     }
 
     .btn:disabled{
       opacity:.45;
       cursor:not-allowed;
+      transform:none;
     }
 
     .guide{
-      border:1px solid var(--line);
-      border-radius:20px;
+      border:1px solid #edf1f5;
+      border-radius:24px;
       overflow:hidden;
       background:#fff;
     }
 
     .guide-section{
-      padding:24px;
+      padding:26px;
     }
 
     .guide-section + .guide-section{
-      border-top:1px solid var(--line);
+      border-top:1px solid #eff3f6;
     }
 
     .section-label{
-      margin:0 0 12px;
-      font-size:13px;
+      margin:0 0 14px;
+      font-size:12px;
       font-weight:900;
-      color:#6b7280;
+      color:#7b8794;
       text-transform:uppercase;
-      letter-spacing:.04em;
+      letter-spacing:.08em;
     }
 
     .lead-box{
-      background:linear-gradient(180deg,#fbfffd 0%, #f3fff8 100%);
+      background:linear-gradient(180deg,#fcfffd 0%, #f4fbf7 100%);
     }
 
     .lead-text{
       margin:0;
-      font-size:20px;
+      font-size:22px;
       line-height:1.5;
       font-weight:800;
-      letter-spacing:-.02em;
+      letter-spacing:-.025em;
       word-break:keep-all;
     }
 
-    .flow-list{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin:0;
-      padding:0;
-      list-style:none;
+    .process-strip-wrap{
+      padding:16px;
+      border-radius:22px;
+      background:var(--soft-blue);
+      border:1px solid #e4edf7;
     }
 
-    .flow-list li{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:14px 0;
-      border-bottom:1px solid #eef2f7;
-      min-width:0;
-    }
-
-    .flow-list li:last-child{
-      border-bottom:none;
-      padding-bottom:0;
-    }
-
-    .flow-num{
-      width:28px;
-      height:28px;
-      border-radius:999px;
+    .process-strip{
       display:grid;
-      place-items:center;
-      background:#111827;
-      color:#fff;
-      font-size:12px;
-      font-weight:800;
-      flex:0 0 28px;
-      margin-top:1px;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:14px;
     }
 
-    .flow-text{
+    .process-card{
+      position:relative;
+      min-height:76px;
+      padding:18px 16px 14px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid #ebeff5;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
       font-size:15px;
-      font-weight:700;
-      word-break:break-word;
+      font-weight:800;
+      color:#222;
+      line-height:1.45;
+      box-shadow:0 3px 10px rgba(15,23,42,.03);
+      transition:all .18s ease;
+      word-break:keep-all;
+    }
+
+    .process-card.done{
+      background:#f9fcfa;
+      border-color:#dce9e1;
+      color:#3f4d46;
+    }
+
+    .process-card.current{
+      background:linear-gradient(180deg,#f5fff9 0%, #ecfff4 100%);
+      border-color:#bdeccc;
+      color:#029347;
+      box-shadow:0 8px 20px rgba(3,199,90,.10);
+    }
+
+    .process-card::before{
+      content:attr(data-step);
+      position:absolute;
+      top:10px;
+      left:12px;
+      font-size:11px;
+      font-weight:900;
+      color:#94a3b8;
+      letter-spacing:.06em;
     }
 
     .detail-list{
@@ -439,7 +464,7 @@
     }
 
     .detail-item{
-      padding:18px 0;
+      padding:20px 0;
       border-bottom:1px solid #eef2f7;
     }
 
@@ -449,9 +474,9 @@
     }
 
     .detail-title{
-      margin:0 0 8px;
-      font-size:17px;
-      font-weight:800;
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:900;
       letter-spacing:-.02em;
       word-break:keep-all;
     }
@@ -466,7 +491,14 @@
 
     .detail-body p{margin:0 0 10px}
     .detail-body p:last-child{margin-bottom:0}
-    .detail-body table{width:100%; min-width:560px; border-collapse:collapse; background:#fff}
+
+    .detail-body table{
+      width:100%;
+      min-width:560px;
+      border-collapse:collapse;
+      background:#fff;
+    }
+
     .detail-body th,.detail-body td{
       padding:12px 14px;
       border-bottom:1px solid var(--line);
@@ -475,25 +507,27 @@
       font-size:14px;
       word-break:break-word;
     }
+
     .detail-body th{
-      background:#f9fafb;
+      background:#f8fafc;
       font-size:13px;
       font-weight:800;
       color:#374151;
     }
+
     .detail-body .table-wrap{
       width:100%;
       overflow-x:auto;
       margin-top:12px;
       border:1px solid var(--line);
-      border-radius:14px;
+      border-radius:16px;
     }
 
     .subnote{
-      margin-top:10px;
-      padding:14px;
-      border-radius:14px;
-      background:var(--soft);
+      margin-top:12px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:#f8fbfd;
       border:1px solid var(--line);
       font-size:14px;
       color:#374151;
@@ -503,9 +537,9 @@
     }
 
     .warn{
-      margin-top:10px;
-      padding:14px;
-      border-radius:14px;
+      margin-top:12px;
+      padding:14px 16px;
+      border-radius:16px;
       background:var(--warn-bg);
       border:1px solid var(--warn-line);
       color:var(--warn-text);
@@ -519,9 +553,9 @@
     }
 
     .render-image{
-      margin-top:12px;
+      margin-top:14px;
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:18px;
       overflow:hidden;
       background:#fff;
     }
@@ -543,18 +577,24 @@
     .check-area{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
+      gap:12px;
     }
 
     .check-row{
       display:flex;
       gap:10px;
       align-items:flex-start;
-      padding:14px;
+      padding:15px 16px;
       border:1px solid var(--line);
-      border-radius:14px;
-      background:#fafafa;
+      border-radius:16px;
+      background:#fbfcfd;
       min-width:0;
+      transition:all .15s ease;
+    }
+
+    .check-row:hover{
+      background:#fff;
+      box-shadow:var(--shadow-soft);
     }
 
     .check-row input{
@@ -575,7 +615,7 @@
       display:flex;
       justify-content:space-between;
       gap:12px;
-      margin-top:16px;
+      margin-top:18px;
       flex-wrap:wrap;
     }
 
@@ -588,7 +628,7 @@
     .error{
       margin-top:12px;
       padding:16px;
-      border-radius:14px;
+      border-radius:16px;
       background:var(--danger-bg);
       border:1px solid var(--danger-line);
       color:var(--danger-text);
@@ -619,6 +659,7 @@
       position:absolute;
       inset:0;
       background:rgba(15,23,42,.48);
+      backdrop-filter:blur(2px);
     }
 
     .modal-panel{
@@ -627,9 +668,9 @@
       max-height:85vh;
       overflow:auto;
       background:#fff;
-      border-radius:24px;
+      border-radius:26px;
       border:1px solid var(--line);
-      box-shadow:0 24px 60px rgba(15,23,42,.24);
+      box-shadow:0 24px 60px rgba(15,23,42,.20);
       padding:24px;
     }
 
@@ -740,11 +781,20 @@
     @media (max-width:640px){
       .app{padding:10px}
       .main{padding:18px}
-      h1{font-size:24px}
-      .hero h2{font-size:23px}
+      h1{font-size:25px}
+      .hero h2{font-size:24px}
       .guide-section{padding:18px}
       .modal-panel{padding:18px}
       .modal-title{font-size:20px}
+      .lead-text{font-size:18px}
+      .process-strip{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .process-card{
+        min-height:64px;
+        font-size:14px;
+        padding:14px 12px;
+      }
     }
   </style>
 </head>
@@ -753,7 +803,7 @@
     <div class="topbar">
       <div class="badge">셀프 세팅 가이드</div>
       <h1 id="pageTitle">품고 셀프 온보딩</h1>
-      <p class="sub" id="appSub">시트에 입력한 내용이 자동 반영됩니다.</p>
+      <p class="sub" id="appSub">안내에 따라 순서대로 진행하면 설정을 직접 완료할 수 있어요.</p>
     </div>
 
     <div class="layout">
@@ -787,19 +837,21 @@
           </div>
 
           <div class="actions">
-            <button class="btn secondary" id="faqBtn" type="button">FAQ 보기</button>
+            <button class="btn secondary" id="faqBtn" type="button">자주 묻는 질문</button>
           </div>
         </div>
 
         <section class="guide">
           <div class="guide-section lead-box">
-            <div class="section-label">이 단계에서는 뭘 할까요?</div>
+            <div class="section-label">이번 단계에서 할 일</div>
             <p class="lead-text" id="leadText">시트 데이터를 불러오는 중입니다.</p>
           </div>
 
           <div class="guide-section">
-            <div class="section-label">이렇게 진행해요</div>
-            <ul class="flow-list" id="flowList"></ul>
+            <div class="section-label">진행 순서</div>
+            <div class="process-strip-wrap">
+              <div class="process-strip" id="flowList"></div>
+            </div>
           </div>
 
           <div class="guide-section">
@@ -848,7 +900,7 @@
         faqs: 'faqs',
         clients: '고객사링크'
       },
-      DEFAULT_SUBTITLE: '시트에 입력한 내용이 자동 반영됩니다.'
+      DEFAULT_SUBTITLE: '안내에 따라 순서대로 진행하면 설정을 직접 완료할 수 있어요.'
     };
 
     let DATA = [];
@@ -916,7 +968,7 @@
         document.title = `${customerName} | 품고 셀프 온보딩`;
         pageTitle.textContent = customerName ? `${customerName} 셀프 온보딩` : '품고 셀프 온보딩';
         appSub.textContent = customerName
-          ? `${customerName} 전용 셀프 온보딩 페이지입니다.`
+          ? `${customerName} 전용 셀프 세팅 페이지입니다. 아래 순서대로 진행해주세요.`
           : CONFIG.DEFAULT_SUBTITLE;
 
         state = loadState();
@@ -1122,13 +1174,23 @@
       leadText.innerHTML = step.leadHtml || '<span class="empty">리드문구가 비어 있습니다.</span>';
 
       flowList.innerHTML = "";
+      const checks = getChecks(step.id);
+      const checkedCount = checks.filter(Boolean).length;
+
       step.items.forEach((item, idx) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <div class="flow-num">${idx + 1}</div>
-          <div class="flow-text">${escapeHtml(item.title)}</div>
-        `;
-        flowList.appendChild(li);
+        const card = document.createElement("div");
+        let cls = "process-card";
+
+        if (idx < checkedCount) {
+          cls += " done";
+        } else if (idx === checkedCount) {
+          cls += " current";
+        }
+
+        card.className = cls;
+        card.setAttribute("data-step", `STEP ${idx + 1}`);
+        card.innerHTML = `<span>${escapeHtml(item.title)}</span>`;
+        flowList.appendChild(card);
       });
 
       detailList.innerHTML = "";
@@ -1140,8 +1202,6 @@
       });
 
       checkArea.innerHTML = "";
-      const checks = getChecks(step.id);
-
       step.checks.forEach((label, i) => {
         const row = document.createElement("label");
         row.className = "check-row";
