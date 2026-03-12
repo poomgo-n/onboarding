@@ -1,474 +1,434 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>N배송 세팅 가이드</title>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
 
-<title>N배송 세팅 가이드</title>
-
-<style>
-
-body{
-font-family:Pretendard, sans-serif;
-background:#f6f7fb;
-margin:0;
-padding:0;
-}
-
-.container{
-max-width:760px;
-margin:auto;
-padding:40px 20px;
-}
-
-.logo{
-width:160px;
-margin-bottom:20px;
-}
-
-.card{
-background:white;
-border-radius:14px;
-padding:32px;
-box-shadow:0 8px 24px rgba(0,0,0,0.08);
-}
-
-.title{
-font-size:26px;
-font-weight:700;
-color:#03c75a;
-margin-bottom:12px;
-}
-
-.subtitle{
-color:#666;
-margin-bottom:30px;
-}
-
-.section{
-margin-bottom:28px;
-}
-
-.label{
-font-weight:600;
-margin-bottom:8px;
-display:block;
-}
-
-.input{
-width:100%;
-padding:12px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:14px;
-}
-
-.radio-group{
-display:flex;
-gap:16px;
-margin-top:6px;
-}
-
-.desc{
-font-size:13px;
-color:#777;
-margin-top:6px;
-}
-
-.btn{
-background:#0040d1;
-color:white;
-padding:14px 26px;
-border:none;
-border-radius:10px;
-font-size:15px;
-font-weight:600;
-cursor:pointer;
-}
-
-.center{
-text-align:center;
-margin-top:40px;
-}
-
-.hidden{
-display:none;
-}
-
-.image-option{
-display:flex;
-gap:16px;
-margin-top:12px;
-}
-
-.image-option img{
-width:120px;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-.summary{
-line-height:1.6;
-}
-
-</style>
-
+  <style>
+    :root{
+      --bg:#f4f6f8;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e7ebf0;
+      --brand:#0040d1;
+      --brand-soft:#eef3ff;
+      --shadow:0 10px 30px rgba(15,23,42,.05);
+      --radius-xl:24px;
+      --radius-lg:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Pretendard Variable","Pretendard",system-ui,sans-serif;
+      background:linear-gradient(180deg,#f7f9fb 0%, #f2f5f8 100%);
+      color:var(--text);
+    }
+    .wrap{max-width:860px;margin:0 auto;padding:32px 18px 48px}
+    .logo{height:30px;width:auto;display:block;margin-bottom:18px}
+    .card{
+      background:#fff;border:1px solid var(--line);border-radius:28px;
+      box-shadow:var(--shadow);padding:28px;
+    }
+    h1{margin:0 0 8px;font-size:32px;letter-spacing:-.03em}
+    .sub{margin:0 0 28px;color:var(--muted);white-space:pre-line}
+    .section{margin-bottom:24px}
+    .label{display:block;font-size:15px;font-weight:800;margin-bottom:10px}
+    .req{color:#dc2626}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .full{grid-column:1 / -1}
+    .input,.select,.textarea{
+      width:100%;padding:14px;border:1px solid #dbe3ee;border-radius:14px;
+      outline:none;font:inherit;
+    }
+    .input:focus,.select:focus,.textarea:focus{border-color:#b5c9ff}
+    .textarea{min-height:120px;resize:vertical}
+    .choice-row{display:flex;gap:10px;flex-wrap:wrap}
+    .choice-pill{
+      border:1px solid #dbe3ee;background:#fff;border-radius:999px;
+      padding:10px 14px;display:inline-flex;align-items:center;gap:8px;
+      cursor:pointer;font-weight:700;color:#374151;
+    }
+    .hint{font-size:12px;color:var(--muted);margin-top:8px;white-space:pre-line}
+    .pack-preview{
+      margin-top:12px;padding:14px;border:1px solid #e5ebf2;border-radius:18px;background:#fbfcfe;
+      display:grid;grid-template-columns:120px 1fr;gap:14px
+    }
+    .pack-preview img{
+      width:120px;height:120px;object-fit:cover;border-radius:14px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;
+    }
+    .pack-preview h4{margin:0 0 6px;font-size:15px}
+    .pack-preview p{margin:0;font-size:14px;color:#4b5563;white-space:pre-line}
+    .actions{display:flex;justify-content:flex-end;margin-top:28px}
+    .btn{
+      border:none;background:var(--brand);color:#fff;padding:14px 20px;border-radius:14px;
+      font-weight:800;cursor:pointer;
+    }
+    .hidden{display:none !important}
+    .error{
+      margin-top:16px;padding:14px;border-radius:14px;background:#fff1f2;border:1px solid #fecdd3;
+      color:#be123c;white-space:pre-line;
+    }
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;z-index:1000;
+    }
+    .modal.open{display:flex}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.48)}
+    .modal-panel{
+      position:relative;width:min(760px,100%);max-height:85vh;overflow:auto;
+      background:#fff;border-radius:24px;border:1px solid var(--line);padding:24px;
+      box-shadow:0 24px 60px rgba(15,23,42,.20);
+    }
+    .summary-list{display:grid;gap:10px}
+    .summary-item{display:grid;grid-template-columns:180px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #e6ecfb}
+    .summary-item:last-child{border-bottom:none}
+    .summary-key{font-size:13px;font-weight:900;color:#4b5563}
+    .summary-val{font-size:14px;white-space:pre-line;word-break:break-word}
+    .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+    .btn.secondary{background:#fff;color:#111827;border:1px solid var(--line)}
+    .image-modal img{width:100%;border-radius:18px}
+    @media (max-width:640px){
+      .grid{grid-template-columns:1fr}
+      .summary-item{grid-template-columns:1fr}
+      .pack-preview{grid-template-columns:1fr}
+      .pack-preview img{width:100%;height:180px}
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<img class="logo"
-src="https://drive.google.com/uc?export=view&id=1tgVRxlRQ63QkShpmz1434yuWDD9MpKjw">
-
-<div class="card">
-
-<div class="title">
-N배송 세팅 가이드
-</div>
-
-<div class="subtitle">
-원활한 N배송 세팅을 위해 아래 정보를 입력해주세요.
-</div>
-
-
-<form id="inquiryForm">
-
-<!-- 1 -->
-
-<div class="section">
-
-<label class="label">
-1. 품고 나우 로그인 계정 정보
-</label>
-
-<input class="input" id="email" placeholder="이메일 주소">
-
-<input class="input" id="manager"
-placeholder="담당자명"
-style="margin-top:10px">
-
-<input class="input" id="phone"
-placeholder="연락처"
-style="margin-top:10px">
-
-</div>
-
-
-<!-- 2 -->
-
-<div class="section">
-
-<label class="label">
-2. 브랜드 주소지 및 대표번호
-</label>
-
-<input class="input" id="brandAddress"
-placeholder="브랜드 주소지">
-
-<input class="input" id="brandPhone"
-placeholder="대표번호"
-style="margin-top:10px">
-
-</div>
-
-
-<!-- 3 -->
-
-<div class="section">
-
-<label class="label">
-3. 반품 회수지
-</label>
-
-<div class="radio-group">
-
-<label>
-<input type="radio" name="return" value="품고"> 품고
-</label>
-
-<label>
-<input type="radio" name="return" value="자사물류"> 자사 물류
-</label>
-
-</div>
-
-</div>
-
-
-<!-- 4 -->
-
-<div class="section">
-
-<label class="label">
-4. 초도 입고 예정일
-</label>
-
-<input class="input"
-type="date"
-id="inboundDate">
-
-</div>
-
-
-<!-- 5 -->
-
-<div class="section">
-
-<label class="label">
-5. 포장 방법
-</label>
-
-<select class="input" id="packing">
-
-<option value="기본포장">
-기본 포장
-</option>
-
-<option value="에어캡">
-에어캡 포장
-</option>
-
-<option value="버블페이퍼">
-버블페이퍼 포장
-</option>
-
-</select>
-
-<div class="image-option">
-
-<img src="https://i.imgur.com/Jnq6E1G.png">
-
-<img src="https://i.imgur.com/V3yQp0P.png">
-
-<img src="https://i.imgur.com/4k9F6fF.png">
-
-</div>
-
-<div class="desc">
-
-기본 포장 : 박스 상·하단에 에어캡을 덮어 출고  
-에어캡 포장 : 에어캡 완충 후 출고 (추가 비용 발생)  
-버블페이퍼 포장 : 버블페이퍼 완충 후 출고 (추가 비용 발생)
-
-</div>
-
-</div>
-
-
-<!-- 6 -->
-
-<div class="section">
-
-<label class="label">
-
-6. 단수 출고 상품 여부
-
-</label>
-
-<div class="radio-group">
-
-<label>
-
-<input type="radio" name="single"
-value="Y"> Y
-
-</label>
-
-<label>
-
-<input type="radio" name="single"
-value="N"> N
-
-</label>
-
-</div>
-
-<div class="desc">
-
-합포 없이 상품(SKU) 자체에 송장을 부착하는 상품이 있는 경우 체크해주세요
-
-</div>
-
-</div>
-
-
-<!-- 7 -->
-
-<div class="section">
-
-<label class="label">
-
-7. 초도 입고 예정 월에 행사 예정이 있나요?
-
-</label>
-
-<div class="radio-group">
-
-<label>
-
-<input type="radio"
-name="event"
-value="Y"
-onclick="toggleEvent(true)"> Y
-
-</label>
-
-<label>
-
-<input type="radio"
-name="event"
-value="N"
-onclick="toggleEvent(false)"> N
-
-</label>
-
-</div>
-
-<div id="eventArea" class="hidden">
-
-<input class="input"
-id="eventName"
-placeholder="행사명"
-style="margin-top:10px">
-
-<input class="input"
-type="date"
-id="eventDate"
-style="margin-top:10px">
-
-<input class="input"
-id="eventQty"
-placeholder="예상 출고 송장 건수"
-style="margin-top:10px">
-
-</div>
-
-</div>
-
-
-<!-- 8 -->
-
-<div class="section">
-
-<label class="label">
-
-8. 품고에 궁금한 사항
-
-</label>
-
-<textarea
-class="input"
-id="question"
-rows="4"
-placeholder="자유롭게 작성해주세요"></textarea>
-
-</div>
-
-
-<div class="center">
-
-<button type="button"
-class="btn"
-onclick="submitForm()">
-
-제출하기
-
-</button>
-
-</div>
-
-
-</form>
-
-</div>
-
-</div>
-
-
-
-<script>
-
-const WEBAPP =
-"https://script.google.com/macros/s/AKfycbwwxe5ZigCmq-tjXyGZJUK1Nomije28Fu6Ueb-pw_d2KUsTsGHE5lcEeG505gfcVV-M/exec";
-
-
-function toggleEvent(show){
-
-const el=document.getElementById("eventArea");
-
-if(show){
-
-el.classList.remove("hidden");
-
-}else{
-
-el.classList.add("hidden");
-
-}
-
-}
-
-
-
-function submitForm(){
-
-const data={
-
-email:email.value,
-
-manager:manager.value,
-
-phone:phone.value,
-
-brandAddress:brandAddress.value,
-
-brandPhone:brandPhone.value,
-
-returnType:document.querySelector('input[name="return"]:checked')?.value,
-
-inboundDate:inboundDate.value,
-
-packing:packing.value,
-
-singleShip:document.querySelector('input[name="single"]:checked')?.value,
-
-event:document.querySelector('input[name="event"]:checked')?.value,
-
-eventName:eventName.value,
-
-eventDate:eventDate.value,
-
-eventQty:eventQty.value,
-
-question:question.value
-
-};
-
-
-
-fetch(WEBAPP,{
-
-method:"POST",
-
-body:JSON.stringify(data)
-
-})
-
-.then(r=>r.text())
-
-.then(()=>{
-
-alert("제출이 완료되었습니다.\n\n제출 내용을 확인 후 N배송 세팅 가이드를 오픈해드립니다.");
-
-});
-
-}
-
-</script>
-
-
+  <div class="wrap">
+    <img class="logo" src="https://drive.google.com/uc?export=view&id=1tgVRxlRQ63QkShpmz1434yuWDD9MpKjw" alt="회사 로고">
+    <div class="card">
+      <h1>N배송 세팅 가이드</h1>
+      <p class="sub">원활한 N배송 세팅을 위해 아래 정보를 입력해주세요.</p>
+
+      <form id="inquiryForm">
+        <div class="section">
+          <label class="label">1. 품고 나우에 로그인 계정으로 사용할 이메일 주소 / 담당자명 / 연락처를 입력해주세요. <span class="req">*</span></label>
+          <div class="grid">
+            <input class="input" id="loginEmail" type="email" placeholder="이메일 주소">
+            <input class="input" id="managerName" type="text" placeholder="담당자명">
+            <input class="input full" id="managerPhone" type="text" placeholder="연락처">
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="label">2. 브랜드 주소지 및 대표번호를 입력해주세요. <span class="req">*</span></label>
+          <div class="grid">
+            <input class="input" id="brandAddress" type="text" placeholder="브랜드 주소지">
+            <input class="input" id="brandPhone" type="text" placeholder="대표번호">
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="label">3. 반품 입고지를 선택해주세요. <span class="req">*</span></label>
+          <div class="choice-row">
+            <label class="choice-pill"><input type="radio" name="returnDest" value="품고"> 품고</label>
+            <label class="choice-pill"><input type="radio" name="returnDest" value="자사 물류"> 자사 물류</label>
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="label">4. 초도 입고 예정일을 입력해주세요. <span class="req">*</span></label>
+          <input class="input" id="inboundDate" type="date">
+        </div>
+
+        <div class="section">
+          <label class="label">5. 포장 방법을 선택해주세요. <span class="req">*</span></label>
+          <select class="select" id="packType">
+            <option value="">선택해주세요</option>
+            <option value="기본 포장">기본 포장</option>
+            <option value="에어캡 포장">에어캡 포장</option>
+            <option value="버블페이퍼 포장">버블페이퍼 포장</option>
+          </select>
+          <div id="packPreview" class="hidden"></div>
+        </div>
+
+        <div class="section">
+          <label class="label">6. 운영 예정 상품(SKU) 중 단수 출고가 필요한 상품(SKU)이 있나요? <span class="req">*</span></label>
+          <div class="hint">합포 없이 상품(SKU) 자체에 송장을 부착하여 출고해야 하는 상품이 있는 경우 선택해주세요.</div>
+          <div class="choice-row" style="margin-top:10px;">
+            <label class="choice-pill"><input type="radio" name="singleShipment" value="Y"> Y</label>
+            <label class="choice-pill"><input type="radio" name="singleShipment" value="N"> N</label>
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="label">7. 초도 입고 예정 월에 예정된 행사 정보가 있나요? <span class="req">*</span></label>
+          <div class="choice-row">
+            <label class="choice-pill"><input type="radio" name="eventPlan" value="Y"> Y</label>
+            <label class="choice-pill"><input type="radio" name="eventPlan" value="N"> N</label>
+          </div>
+
+          <div id="eventFields" class="grid hidden" style="margin-top:12px;">
+            <input class="input" id="eventName" type="text" placeholder="행사명">
+            <input class="input" id="eventDate" type="date">
+            <input class="input full" id="eventExpectedCount" type="number" min="0" placeholder="예상 출고 송장 건 수">
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="label">8. 품고에 궁금한 사항이 있으시면 편하게 기재해주세요.</label>
+          <textarea class="textarea" id="inquiryText" placeholder="예: 운영/시스템/반품/포장 관련 문의사항"></textarea>
+        </div>
+
+        <div id="inquiryError" class="error hidden"></div>
+
+        <div class="actions">
+          <button class="btn" type="button" id="submitBtn">제출하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="summaryModal" aria-hidden="true">
+    <div class="modal-backdrop" id="summaryBackdrop"></div>
+    <div class="modal-panel">
+      <h3 style="margin-top:0;">입력 내용 확인</h3>
+      <p style="color:#6b7280;">제출 전에 입력하신 내용을 한 번 더 확인해주세요.</p>
+      <div class="summary-list" id="summaryList"></div>
+      <div class="modal-actions">
+        <button class="btn secondary" type="button" id="summaryEditBtn">수정하기</button>
+        <button class="btn" type="button" id="summarySubmitBtn">제출 완료</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="submitModal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <h3 style="margin-top:0;">제출중입니다</h3>
+      <p style="color:#6b7280;">입력하신 내용을 전송하고 있어요. 잠시만 기다려주세요.</p>
+      <p style="margin:18px 0 0;">제출된 내용을 확인 후 N배송 세팅 가이드를 오픈해드립니다.</p>
+    </div>
+  </div>
+
+  <div class="modal image-modal" id="imageModal" aria-hidden="true">
+    <div class="modal-backdrop" id="imageBackdrop"></div>
+    <div class="modal-panel">
+      <img id="imageModalTarget" src="" alt="포장 예시 이미지">
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      GAS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbwwxe5ZigCmq-tjXyGZJUK1Nomije28Fu6Ueb-pw_d2KUsTsGHE5lcEeG505gfcVV-M/exec',
+      PACK_OPTIONS: {
+        '기본 포장': {
+          title: '기본 포장',
+          desc: '제품에 별도 완충 없이 박스 상·하단에 에어캡을 덮어 출고하는 방식입니다.',
+          image: 'https://drive.google.com/file/d/1tITH7c-WsVejDK2F2JsECSvHMcpDnMJt/view?usp=drive_link'
+        },
+        '에어캡 포장': {
+          title: '에어캡 포장',
+          desc: '제품을 에어캡으로 완충 포장 후 출고하는 방식입니다.\\n추가 비용이 발생합니다.',
+          image: 'https://drive.google.com/file/d/110e8PsWHq-2XkOYg7bXiONNn_1XpA-ip/view?usp=drive_link'
+        },
+        '버블페이퍼 포장': {
+          title: '버블페이퍼 포장',
+          desc: '제품을 버블페이퍼로 완충 포장 후 출고하는 방식입니다.\\n추가 비용이 발생합니다.',
+          image: 'https://drive.google.com/file/d/1W2CYbdHLX7Uj2InTm-0HH-CaKnmAOomg/view?usp=drive_link'
+        }
+      }
+    };
+
+    const params = new URLSearchParams(location.search);
+    const clientCode = params.get('client') || '';
+
+    const packType = document.getElementById('packType');
+    const packPreview = document.getElementById('packPreview');
+    const eventFields = document.getElementById('eventFields');
+    const inquiryError = document.getElementById('inquiryError');
+    const summaryModal = document.getElementById('summaryModal');
+    const summaryList = document.getElementById('summaryList');
+    const submitModal = document.getElementById('submitModal');
+    const imageModal = document.getElementById('imageModal');
+    const imageModalTarget = document.getElementById('imageModalTarget');
+
+    document.querySelectorAll('input[name="eventPlan"]').forEach(el => {
+      el.addEventListener('change', () => {
+        const value = document.querySelector('input[name="eventPlan"]:checked')?.value || '';
+        eventFields.classList.toggle('hidden', value !== 'Y');
+      });
+    });
+
+    packType.addEventListener('change', () => renderPackPreview(packType.value));
+    document.getElementById('submitBtn').addEventListener('click', openSummary);
+    document.getElementById('summaryEditBtn').addEventListener('click', closeSummary);
+    document.getElementById('summaryBackdrop').addEventListener('click', closeSummary);
+    document.getElementById('summarySubmitBtn').addEventListener('click', submitInquiry);
+    document.getElementById('imageBackdrop').addEventListener('click', closeImageModal);
+
+    function normalizeImageUrl(url) {
+      const raw = String(url || '').trim();
+      if (!raw) return '';
+      const m1 = raw.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1) return `https://drive.google.com/thumbnail?id=${m1[1]}&sz=w1600`;
+      const m2 = raw.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m2) return `https://drive.google.com/thumbnail?id=${m2[1]}&sz=w1600`;
+      return raw;
+    }
+
+    function renderPackPreview(value) {
+      const info = CONFIG.PACK_OPTIONS[value];
+      if (!info) {
+        packPreview.classList.add('hidden');
+        packPreview.innerHTML = '';
+        return;
+      }
+
+      const src = normalizeImageUrl(info.image);
+      packPreview.innerHTML = `
+        <div class="pack-preview">
+          <img src="${src}" alt="${escapeHtml(info.title)}" id="packPreviewImage">
+          <div>
+            <h4>${escapeHtml(info.title)}</h4>
+            <p>${escapeHtml(info.desc).replaceAll('\\n', '<br>')}</p>
+          </div>
+        </div>
+      `;
+      packPreview.classList.remove('hidden');
+
+      document.getElementById('packPreviewImage').addEventListener('click', () => {
+        imageModalTarget.src = src;
+        imageModal.classList.add('open');
+      });
+    }
+
+    function closeImageModal() {
+      imageModal.classList.remove('open');
+      imageModalTarget.src = '';
+    }
+
+    function getFormValues() {
+      const eventPlan = document.querySelector('input[name="eventPlan"]:checked')?.value || '';
+      return {
+        action: 'submitInquiry',
+        clientCode,
+        clientName: '',
+        loginEmail: document.getElementById('loginEmail').value.trim(),
+        managerName: document.getElementById('managerName').value.trim(),
+        managerPhone: document.getElementById('managerPhone').value.trim(),
+        brandAddress: document.getElementById('brandAddress').value.trim(),
+        brandPhone: document.getElementById('brandPhone').value.trim(),
+        returnDest: document.querySelector('input[name="returnDest"]:checked')?.value || '',
+        inboundDate: document.getElementById('inboundDate').value,
+        packType: document.getElementById('packType').value,
+        singleShipment: document.querySelector('input[name="singleShipment"]:checked')?.value || '',
+        eventPlan,
+        eventName: document.getElementById('eventName').value.trim(),
+        eventDate: document.getElementById('eventDate').value,
+        eventExpectedCount: document.getElementById('eventExpectedCount').value,
+        inquiryText: document.getElementById('inquiryText').value.trim()
+      };
+    }
+
+    function validateForm(v) {
+      if (!clientCode) return '링크 정보가 올바르지 않습니다. 고객사 링크를 다시 확인해주세요.';
+      if (!v.loginEmail) return '로그인 이메일 주소를 입력해주세요.';
+      if (!v.managerName) return '담당자명을 입력해주세요.';
+      if (!v.managerPhone) return '연락처를 입력해주세요.';
+      if (!v.brandAddress) return '브랜드 주소지를 입력해주세요.';
+      if (!v.brandPhone) return '대표번호를 입력해주세요.';
+      if (!v.returnDest) return '반품 입고지를 선택해주세요.';
+      if (!v.inboundDate) return '초도 입고 예정일을 선택해주세요.';
+      if (!v.packType) return '포장 방법을 선택해주세요.';
+      if (!v.singleShipment) return '단수 출고 여부를 선택해주세요.';
+      if (!v.eventPlan) return '행사 예정 여부를 선택해주세요.';
+      if (v.eventPlan === 'Y') {
+        if (!v.eventName) return '행사명을 입력해주세요.';
+        if (!v.eventDate) return '행사 일자를 선택해주세요.';
+        if (v.eventExpectedCount === '') return '예상 출고 송장 건 수를 입력해주세요.';
+      }
+      return '';
+    }
+
+    function openSummary() {
+      const v = getFormValues();
+      const error = validateForm(v);
+      if (error) {
+        inquiryError.textContent = error;
+        inquiryError.classList.remove('hidden');
+        return;
+      }
+      inquiryError.classList.add('hidden');
+
+      const rows = [
+        ['로그인 이메일', v.loginEmail],
+        ['담당자명', v.managerName],
+        ['연락처', v.managerPhone],
+        ['브랜드 주소지', v.brandAddress],
+        ['대표번호', v.brandPhone],
+        ['반품 입고지', v.returnDest],
+        ['초도 입고 예정일', v.inboundDate],
+        ['포장 방법', v.packType],
+        ['단수 출고 여부', v.singleShipment],
+        ['행사 예정 여부', v.eventPlan],
+        ['행사명', v.eventPlan === 'Y' ? v.eventName || '-' : '해당없음'],
+        ['행사 일자', v.eventPlan === 'Y' ? v.eventDate || '-' : '해당없음'],
+        ['예상 출고 송장 건 수', v.eventPlan === 'Y' ? v.eventExpectedCount || '-' : '해당없음'],
+        ['문의사항', v.inquiryText || '없음']
+      ];
+
+      summaryList.innerHTML = rows.map(([k, val]) => `
+        <div class="summary-item">
+          <div class="summary-key">${escapeHtml(k)}</div>
+          <div class="summary-val">${escapeHtml(String(val))}</div>
+        </div>
+      `).join('');
+
+      summaryModal.classList.add('open');
+    }
+
+    function closeSummary() {
+      summaryModal.classList.remove('open');
+    }
+
+    async function submitInquiry() {
+      closeSummary();
+      submitModal.classList.add('open');
+
+      try {
+        const v = getFormValues();
+        const res = await fetch(CONFIG.GAS_WEBAPP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(v)
+        });
+
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          throw new Error('웹앱 응답을 읽지 못했습니다.');
+        }
+        if (!data.ok) throw new Error(data.message || '제출에 실패했습니다.');
+
+        setTimeout(() => {
+          submitModal.classList.remove('open');
+          alert('제출이 완료되었습니다.\\n\\n제출된 내용을 확인 후 N배송 세팅 가이드를 오픈해드립니다.');
+          location.reload();
+        }, 700);
+      } catch (e) {
+        submitModal.classList.remove('open');
+        inquiryError.textContent = e.message || '제출 중 오류가 발생했습니다.';
+        inquiryError.classList.remove('hidden');
+      }
+    }
+
+    function escapeHtml(str='') {
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#39;");
+    }
+  </script>
 </body>
 </html>
