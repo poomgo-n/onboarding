@@ -268,7 +268,7 @@
 <body>
   <div class="app">
     <div class="topbar">
-      <div class="badge">셀프 세팅 가이드</div>
+      <div class="badge">N배송 세팅가이드</div>
       <h1 id="pageTitle">품고 셀프 온보딩</h1>
       <p class="sub" id="appSub">안내에 따라 순서대로 진행하면 설정을 직접 완료할 수 있어요.</p>
     </div>
@@ -603,10 +603,9 @@
         if (!DATA.length) throw new Error('활성화된 steps 데이터가 없습니다.');
 
         const customerName = String(CLIENT_INFO['고객사명'] || '').trim();
-        document.title = `${customerName} | 품고 셀프 온보딩`;
-        pageTitle.textContent = customerName ? `${customerName} 셀프 온보딩` : '품고 셀프 온보딩';
+        document.title = `${customerName} | 품고 N배송 세팅 가이드`;
         appSub.textContent = customerName
-          ? `${customerName} 전용 셀프 세팅 페이지입니다. 아래 순서대로 진행해주세요.`
+          ? `${customerName} 전용 N배송 세팅 가이드입니다. 아래 순서대로 진행해주세요.`
           : CONFIG.DEFAULT_SUBTITLE;
 
         state = loadState();
