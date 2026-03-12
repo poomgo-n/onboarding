@@ -387,12 +387,20 @@ N배송 세팅 가이드에 오신 것을 환영합니다</h2>
             </div>
 
             <div class="field full">
-              <label for="accessEmail"><span class="label-text">8. 품고 나우 시스템 접속 메일 주소</span><span class="req">*</span></label>
+              <label><span class="label-text">8. 단수출고 유무</span><span class="req">*</span></label>
+              <div class="choice-row">
+                <label class="choice-pill"><input type="radio" name="singleShipment" value="Y"> Y</label>
+                <label class="choice-pill"><input type="radio" name="singleShipment" value="N"> N</label>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label for="accessEmail"><span class="label-text">9. 품고 나우 시스템 접속 메일 주소</span><span class="req">*</span></label>
               <input class="input" id="accessEmail" type="email" placeholder="예: example@brand.com" />
             </div>
 
             <div class="field full">
-              <label for="inquiryText"><span class="label-text">9. 품고에 궁금한 사항</span></label>
+              <label for="inquiryText"><span class="label-text">10. 품고에 궁금한 사항</span></label>
               <textarea class="textarea" id="inquiryText" placeholder="예: 초도 입고 후 출고 가능 예상 시점, 포장 비용 기준, 반품 프로세스 등"></textarea>
             </div>
           </div>
@@ -770,6 +778,7 @@ N배송 세팅 가이드에 오신 것을 환영합니다</h2>
         packType: document.getElementById('packType').value,
         returnDest: document.getElementById('returnDest').value,
         eventPlan: document.querySelector('input[name="eventPlan"]:checked')?.value || '',
+        singleShipment: document.querySelector('input[name="singleShipment"]:checked')?.value || '',
         accessEmail: document.getElementById('accessEmail').value.trim(),
         inquiryText: document.getElementById('inquiryText').value.trim()
       };
@@ -784,6 +793,7 @@ N배송 세팅 가이드에 오신 것을 환영합니다</h2>
       if (!v.packType) return '포장 방법을 선택해주세요.';
       if (!v.returnDest) return '반품 회수지를 선택해주세요.';
       if (!v.eventPlan) return '행사 진행 여부를 선택해주세요.';
+      if (!v.singleShipment) return '단수출고 유무를 선택해주세요.';
       if (!v.accessEmail) return '품고 나우 시스템 접속 메일 주소를 입력해주세요.';
       return '';
     }
@@ -806,6 +816,7 @@ N배송 세팅 가이드에 오신 것을 환영합니다</h2>
         ['포장 방법', values.packType || '-'],
         ['반품 회수지', values.returnDest || '-'],
         ['초도 입고 당월 행사 진행 여부', values.eventPlan || '-'],
+        ['단수출고 유무', values.singleShipment || '-'],
         ['품고 나우 시스템 접속 메일 주소', values.accessEmail || '-'],
         ['문의 사항', values.inquiryText || '없음']
       ];
@@ -861,6 +872,7 @@ N배송 세팅 가이드에 오신 것을 환영합니다</h2>
         packType: values.packType,
         returnDest: values.returnDest,
         eventPlan: values.eventPlan,
+        singleShipment: values.singleShipment,
         accessEmail: values.accessEmail,
         inquiryText: values.inquiryText
       };
