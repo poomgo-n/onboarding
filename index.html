@@ -1138,11 +1138,9 @@
       const totalSteps = 3;
       const customerName = String(CLIENT_INFO?.['고객사명'] || '').trim() || '고객사';
 
-      windowTitleText.textContent = `${customerName} 사전 문의`;
-
       setShellTexts({
         badge: `사전 문의 ${inquiryStep + 1}/${totalSteps}`,
-        title: 'N배송 세팅 전 아래 사전 문의를 제출해주세요.',
+        title: 'N배송 세팅 전 원활한 운영을 위 사전 문의를 제출해주세요.',
         desc: '안내에 따라 필요한 정보를 순서대로 입력해주세요.',
         stat: `현재 ${inquiryStep + 1}/${totalSteps} 단계 · 앞으로 ${Math.max(totalSteps - inquiryStep - 1, 0)}단계 남음`,
         percent: ((inquiryStep + 1) / totalSteps) * 100,
