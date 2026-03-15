@@ -11,7 +11,6 @@
 
   <style>
     :root{
-      --bg:#eef2f7;
       --panel:#ffffff;
       --line:#d9e1ea;
       --text:#111827;
@@ -27,9 +26,8 @@
       --shadow:0 14px 34px rgba(15,23,42,.12);
       --progress-bg:#e5ebf2;
       --progress-fill:#0040d1;
-      --card-soft:#f8fbff;
       --card-selected:#eef4ff;
-      --card-border:#d9e4ff;
+      --card-border:#cddcff;
     }
 
     *{box-sizing:border-box}
@@ -52,15 +50,15 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:20px;
+      padding:12px;
     }
 
     .wizard-window{
-      width:min(980px, 100%);
-      height:min(760px, calc(100vh - 40px));
+      width:min(1120px, 100%);
+      height:min(840px, calc(100vh - 24px));
       background:var(--panel);
       border:1px solid #cfd8e4;
-      border-radius:18px;
+      border-radius:20px;
       box-shadow:var(--shadow);
       overflow:hidden;
       display:flex;
@@ -120,7 +118,7 @@
 
     .right-pane{
       width:100%;
-      max-width:760px;
+      max-width:900px;
       margin:0 auto;
       min-width:0;
       min-height:0;
@@ -131,7 +129,7 @@
     }
 
     .pane-top{
-      padding:24px 28px 0;
+      padding:28px 34px 0;
       flex:0 0 auto;
     }
 
@@ -207,7 +205,7 @@
     .pane-content{
       flex:1 1 auto;
       min-height:0;
-      padding:18px 28px 14px;
+      padding:22px 34px 18px;
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -217,9 +215,9 @@
       flex:1 1 auto;
       min-height:0;
       border:1px solid #e8edf3;
-      border-radius:22px;
+      border-radius:24px;
       background:linear-gradient(180deg,#ffffff 0%, #fbfcfe 100%);
-      padding:20px;
+      padding:24px;
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -236,8 +234,8 @@
     }
 
     .hero-box{
-      margin-bottom:14px;
-      padding:14px 16px;
+      margin-bottom:12px;
+      padding:12px 14px;
       border-radius:18px;
       border:1px solid #e4ebf8;
       background:linear-gradient(180deg,#fcfdff 0%, #f4f7ff 100%);
@@ -261,7 +259,7 @@
       overflow-x:hidden;
       display:flex;
       flex-direction:column;
-      gap:12px;
+      gap:10px;
       padding-right:4px;
       scrollbar-width:thin;
     }
@@ -370,7 +368,7 @@
 
     .render-image img{
       width:100%;
-      max-height:220px;
+      max-height:260px;
       object-fit:contain;
       background:#fff;
     }
@@ -455,7 +453,7 @@
     .pane-footer{
       flex:0 0 auto;
       border-top:1px solid #e9eef4;
-      padding:14px 28px;
+      padding:16px 34px;
       display:flex;
       justify-content:space-between;
       align-items:flex-end;
@@ -552,19 +550,22 @@
     .pack-select-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
+      gap:16px;
+      align-items:stretch;
     }
 
     .pack-option{
       border:1px solid #dfe7f1;
-      border-radius:18px;
+      border-radius:20px;
       background:#fff;
       overflow:hidden;
       cursor:pointer;
       transition:.18s ease;
-      display:flex;
-      flex-direction:column;
+      display:grid;
+      grid-template-rows:220px auto 1fr;
       min-height:100%;
+      box-shadow:0 4px 14px rgba(15,23,42,.04);
+      position:relative;
     }
 
     .pack-option:hover{
@@ -584,20 +585,21 @@
       pointer-events:none;
     }
 
-    .pack-option-top{
+    .pack-thumb-wrap{
       position:relative;
-      padding:12px 12px 0;
+      padding:14px 14px 0;
     }
 
     .pack-badge{
       position:absolute;
-      top:20px;
-      right:20px;
+      top:22px;
+      right:22px;
       width:22px;
       height:22px;
       border-radius:50%;
       border:2px solid #c6d2e2;
       background:#fff;
+      z-index:2;
     }
 
     .pack-option.selected .pack-badge{
@@ -608,8 +610,8 @@
 
     .pack-thumb{
       width:100%;
-      height:170px;
-      border-radius:14px;
+      height:100%;
+      border-radius:16px;
       overflow:hidden;
       background:#fff;
       border:1px solid #e5e7eb;
@@ -621,25 +623,28 @@
       object-fit:cover;
     }
 
-    .pack-meta{
-      padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    .pack-meta h4{
+    .pack-title{
       margin:0;
-      font-size:15px;
+      padding:12px 14px 4px;
+      text-align:center;
+      font-size:16px;
       font-weight:900;
+      line-height:1.3;
     }
 
-    .pack-meta p{
+    .pack-desc{
       margin:0;
+      padding:0 14px 16px;
       font-size:13px;
       color:#4b5563;
+      line-height:1.6;
+      text-align:left;
       white-space:pre-line;
-      line-height:1.55;
+      word-break:keep-all;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
     }
 
     .loading{padding:40px 20px;color:var(--muted);font-size:14px}
@@ -750,12 +755,17 @@
 
     @media (max-width:768px){
       .app{padding:10px}
+      .wizard-window{
+        width:100%;
+        height:calc(100vh - 20px);
+      }
       .window-title{font-size:15px}
       .window-sub{display:none}
       .pane-top,.pane-content,.pane-footer{padding-left:18px;padding-right:18px}
       .pane-title{font-size:24px}
       .hero-text{font-size:18px}
       .form-grid,.check-area,.pack-select-grid{grid-template-columns:1fr}
+      .pack-option{grid-template-rows:220px auto 1fr}
       .pane-footer{
         flex-direction:column;
         align-items:stretch;
@@ -844,12 +854,12 @@
         },
         '에어캡 포장': {
           title: '에어캡 포장',
-          desc: '제품을 에어캡으로 완충 포장 후 출고하는 방식입니다.\\n추가 비용이 발생합니다.',
+          desc: '제품을 에어캡으로 완충 포장 후 출고하는 방식입니다.\n추가 비용이 발생합니다.',
           image: 'https://drive.google.com/thumbnail?id=110e8PsWHq-2XkOYg7bXiONNn_1XpA-ip&sz=w1200'
         },
         '버블페이퍼 포장': {
           title: '버블페이퍼 포장',
-          desc: '제품을 버블페이퍼로 완충 포장 후 출고하는 방식입니다.\\n추가 비용이 발생합니다.',
+          desc: '제품을 버블페이퍼로 완충 포장 후 출고하는 방식입니다.\n추가 비용이 발생합니다.',
           image: 'https://drive.google.com/thumbnail?id=1W2CYbdHLX7Uj2InTm-0HH-CaKnmAOomg&sz=w1200'
         }
       }
@@ -902,9 +912,7 @@
           querySheet(CONFIG.SHEETS.clients)
         ]);
 
-        if (!clientCode) {
-          throw new Error('고객사 코드가 없습니다. 링크에 ?client=고객사코드 형식이 필요합니다.');
-        }
+        if (!clientCode) throw new Error('고객사 코드가 없습니다. 링크에 ?client=고객사코드 형식이 필요합니다.');
 
         CLIENT_INFO = findClientInfo_(clientRows, clientCode);
         if (!CLIENT_INFO) throw new Error('유효하지 않은 고객사 링크입니다. 고객사코드를 확인해주세요.');
@@ -931,9 +939,7 @@
       faqCloseBtn.addEventListener('click', closeFaqModal);
 
       document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && faqModal.classList.contains('open')) {
-          closeFaqModal();
-        }
+        if (e.key === 'Escape' && faqModal.classList.contains('open')) closeFaqModal();
       });
     }
 
@@ -941,13 +947,9 @@
       const submitted = String(CLIENT_INFO['사전문의제출여부'] || '').trim().toUpperCase() === 'Y';
       const guideOpened = String(CLIENT_INFO['가이드오픈여부'] || '').trim().toUpperCase() === 'Y';
 
-      if (guideOpened) {
-        renderGuideWizard();
-      } else if (submitted) {
-        renderWaitingScreen();
-      } else {
-        renderInquiryWizard();
-      }
+      if (guideOpened) renderGuideWizard();
+      else if (submitted) renderWaitingScreen();
+      else renderInquiryWizard();
     }
 
     function querySheet(sheetName) {
@@ -1102,11 +1104,8 @@
       for (let i = 0; i < PAGES.length; i++) {
         const page = PAGES[i];
         const step = DATA[page.stepIndex];
-        if (isStepUnlocked(step, page.stepIndex)) {
-          last = i;
-        } else {
-          break;
-        }
+        if (isStepUnlocked(step, page.stepIndex)) last = i;
+        else break;
       }
       return last;
     }
@@ -1170,14 +1169,9 @@
       paneContent.innerHTML = '';
       const card = document.createElement('div');
       card.className = 'screen-card';
-
-      if (inquiryStep === 0) {
-        card.innerHTML = renderInquiryStep1();
-      } else if (inquiryStep === 1) {
-        card.innerHTML = renderInquiryStep2();
-      } else {
-        card.innerHTML = renderInquiryStep3();
-      }
+      card.innerHTML = inquiryStep === 0 ? renderInquiryStep1()
+        : inquiryStep === 1 ? renderInquiryStep2()
+        : renderInquiryStep3();
 
       paneContent.appendChild(card);
       bindInquiryScreenEvents();
@@ -1195,19 +1189,17 @@
               renderInquiryWizard();
             }
           },
-          inquiryStep < 2
-            ? {
-                label: '다음',
-                kind: 'primary',
-                disabled: inquirySubmitting,
-                onClick: handleInquiryNext
-              }
-            : {
-                label: inquirySubmitting ? '제출 중...' : '제출하기',
-                kind: 'primary',
-                disabled: inquirySubmitting,
-                onClick: submitInquiryWizard
-              }
+          inquiryStep < 2 ? {
+            label: '다음',
+            kind: 'primary',
+            disabled: inquirySubmitting,
+            onClick: handleInquiryNext
+          } : {
+            label: inquirySubmitting ? '제출 중...' : '제출하기',
+            kind: 'primary',
+            disabled: inquirySubmitting,
+            onClick: submitInquiryWizard
+          }
         ],
         [
           {
@@ -1270,16 +1262,14 @@
       const options = Object.entries(CONFIG.PACK_OPTIONS).map(([value, info]) => `
         <label class="pack-option" data-pack-option="${escapeAttr(value)}">
           <input type="radio" name="packTypeCard" value="${escapeAttr(value)}">
-          <div class="pack-option-top">
+          <div class="pack-thumb-wrap">
             <span class="pack-badge"></span>
             <div class="pack-thumb">
               <img src="${escapeAttr(info.image)}" alt="${escapeAttr(info.title)}">
             </div>
           </div>
-          <div class="pack-meta">
-            <h4>${escapeHtml(info.title)}</h4>
-            <p>${escapeHtml(info.desc).replaceAll('\\n','<br>')}</p>
-          </div>
+          <h4 class="pack-title">${escapeHtml(info.title)}</h4>
+          <p class="pack-desc">${escapeHtml(info.desc)}</p>
         </label>
       `).join('');
 
@@ -1408,9 +1398,7 @@
     function toggleEventFields() {
       const value = document.querySelector('input[name="eventPlan"]:checked')?.value || '';
       const eventWrap = document.getElementById('eventFields');
-      if (eventWrap) {
-        eventWrap.classList.toggle('hidden', value !== 'Y');
-      }
+      if (eventWrap) eventWrap.classList.toggle('hidden', value !== 'Y');
     }
 
     function collectInquiryDraft() {
@@ -1450,17 +1438,14 @@
         const el = document.querySelector(`input[name="returnDest"][value="${CSS.escape(draft.returnDest)}"]`);
         if (el) el.checked = true;
       }
-
       if (draft.singleShipment) {
         const el = document.querySelector(`input[name="singleShipment"][value="${CSS.escape(draft.singleShipment)}"]`);
         if (el) el.checked = true;
       }
-
       if (draft.eventPlan) {
         const el = document.querySelector(`input[name="eventPlan"][value="${CSS.escape(draft.eventPlan)}"]`);
         if (el) el.checked = true;
       }
-
       if (draft.packType) {
         const el = document.querySelector(`input[name="packTypeCard"][value="${CSS.escape(draft.packType)}"]`);
         if (el) el.checked = true;
@@ -1711,36 +1696,20 @@
 
     function renderGuideScreen(item) {
       const title = `<h3 class="screen-title">${escapeHtml(item.title || '')}</h3>`;
-
-      const body = item.bodyHtml
-        ? `<div class="detail-body">${wrapTables(convertEscapedNewlines_(item.bodyHtml))}</div>`
-        : '';
-
-      const note = item.noteHtml
-        ? `<div class="subnote">${convertEscapedNewlines_(item.noteHtml)}</div>`
-        : '';
-
-      const warn = item.warnHtml
-        ? `<div class="warn"><strong>주의</strong>${convertEscapedNewlines_(item.warnHtml)}</div>`
-        : '';
-
+      const body = item.bodyHtml ? `<div class="detail-body">${wrapTables(convertEscapedNewlines_(item.bodyHtml))}</div>` : '';
+      const note = item.noteHtml ? `<div class="subnote">${convertEscapedNewlines_(item.noteHtml)}</div>` : '';
+      const warn = item.warnHtml ? `<div class="warn"><strong>주의</strong>${convertEscapedNewlines_(item.warnHtml)}</div>` : '';
       const imageUrl = String(item.imageUrl || '').trim();
       const image = imageUrl
         ? `<div class="render-image">
              <img src="${escapeAttr(imageUrl)}" alt="${escapeAttr(item.title || '')}">
-             ${item.imageCaption
-               ? `<div class="render-caption">${escapeHtml(item.imageCaption).replaceAll('\\n','\n')}</div>`
-               : ''}
+             ${item.imageCaption ? `<div class="render-caption">${escapeHtml(item.imageCaption).replaceAll('\\n','\n')}</div>` : ''}
            </div>`
         : '';
-
       const button = item.linkUrl
         ? `<div class="screen-button">
-             <a class="btn primary"
-                href="${escapeAttr(item.linkUrl)}"
-                target="_blank"
-                rel="noopener noreferrer">
-                ${escapeHtml(item.linkText || '바로가기')}
+             <a class="btn primary" href="${escapeAttr(item.linkUrl)}" target="_blank" rel="noopener noreferrer">
+               ${escapeHtml(item.linkText || '바로가기')}
              </a>
            </div>`
         : '';
@@ -1756,21 +1725,12 @@
         `;
       }
 
-      return `
-        ${title}
-        ${body}
-        ${image}
-        ${note}
-        ${warn}
-        ${button}
-      `;
+      return `${title}${body}${image}${note}${warn}${button}`;
     }
 
     function renderChecklist(step) {
       const checks = getChecks(step.id);
-      if (!step.checks.length) {
-        return '<div class="subnote">등록된 체크리스트가 없습니다.</div>';
-      }
+      if (!step.checks.length) return '<div class="subnote">등록된 체크리스트가 없습니다.</div>';
 
       return `
         <div>
@@ -1811,12 +1771,10 @@
         .filter(r => String(r['단계ID'] || '').trim().toLowerCase() === 'inquiry')
         .sort((a, b) => Number(a['FAQ순서'] || 0) - Number(b['FAQ순서'] || 0));
 
-      const merged = [...currentStepFaqs, ...commonFaqs].map(r => ({
+      return [...currentStepFaqs, ...commonFaqs].map(r => ({
         q: r['질문'] || '',
         aHtml: r['답변HTML'] || ''
       }));
-
-      return merged;
     }
 
     function convertEscapedNewlines_(text) {
