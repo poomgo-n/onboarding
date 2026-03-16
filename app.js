@@ -443,7 +443,22 @@ function renderWizardBody(stepNo) {
 
 function renderWizardContentBlock(item) {
   const layout = item.layout || 'text-media';
+  const mediaType = (item.mediaType || '').toLowerCase();
   const media = renderStepMedia(item);
+
+  // HTML 타입은 내부에서 이미 레이아웃을 다 잡는다고 보고
+  // 바깥 2열을 만들지 않고 전체 너비로 그대로 노출
+  if (mediaType === 'html') {
+    return `
+      <section class="wizard-block wizard-block-full">
+        <div class="wizard-col wizard-col-full">
+          <div class="wizard-media-card wizard-media-card-html-only">
+            ${media}
+          </div>
+        </div>
+      </section>
+    `;
+  }
 
   const textCol = `
     <div class="wizard-col wizard-text">
