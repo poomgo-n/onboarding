@@ -504,7 +504,7 @@ textarea{
 }
 
 .wizard-progress-wrap{
-  padding:12px 24px 10px;
+  padding:16px 24px 10px;
   border-bottom:1px solid #F1F5F9;
   background:#fff;
   flex-shrink:0;
@@ -516,7 +516,7 @@ textarea{
   border-radius:999px;
   background:#E5E7EB;
   overflow:hidden;
-  margin:0 auto 14px;
+  margin:0 auto 20px;
 }
 
 .wizard-progress-fill{
@@ -596,7 +596,7 @@ textarea{
 .wizard-block{
   display:grid;
   grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
-  gap:18px;
+  gap:36px;
   height:100%;
   min-height:0;
   align-items:stretch;
@@ -979,7 +979,14 @@ textarea{
     line-height:1.5;
   }
 
-  .wizard-body{
-    padding:14px;
+.wizard-body{
+  flex:1;
+  padding:24px 28px 14px;
+  background:#fff;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
   }
 }
