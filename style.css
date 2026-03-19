@@ -1071,3 +1071,138 @@ textarea{
   font-weight:800;
   color:#6b7280;
 }
+.wizard-substep-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:10px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#f3f4f6;
+  color:#374151;
+  font-size:12px;
+  font-weight:800;
+  vertical-align:middle;
+}
+
+.wizard-substep-guide{
+  margin:0 0 12px;
+  font-size:13px;
+  font-weight:800;
+  color:#6b7280;
+}
+
+.wizard-html-content{
+  pointer-events:auto;
+}
+
+.wizard-html-stage-fit{
+  overflow:auto;
+}
+
+.step-wait-modal.hidden{
+  display:none;
+}
+
+.step-wait-modal{
+  position:fixed;
+  inset:0;
+  z-index:90;
+}
+
+.step-wait-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(15,23,42,.45);
+}
+
+.step-wait-panel{
+  position:relative;
+  width:min(460px, calc(100% - 24px));
+  margin:0 auto;
+  top:50%;
+  transform:translateY(-50%);
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 24px 70px rgba(15,23,42,.22);
+  padding:32px 24px 24px;
+  text-align:center;
+  z-index:91;
+}
+
+.step-wait-emoji{
+  font-size:36px;
+  line-height:1;
+  margin-bottom:14px;
+}
+
+.step-wait-title{
+  font-size:22px;
+  font-weight:800;
+  color:#111827;
+  line-height:1.45;
+  margin-bottom:10px;
+  word-break:keep-all;
+}
+
+.step-wait-desc{
+  font-size:15px;
+  color:#6b7280;
+  line-height:1.8;
+  margin-bottom:22px;
+  word-break:keep-all;
+}
+
+.step-wait-actions{
+  display:flex;
+  justify-content:center;
+}
+
+/* 이미지 확대 */
+.image-zoom-modal.hidden{
+  display:none;
+}
+
+.image-zoom-modal{
+  position:fixed;
+  inset:0;
+  z-index:120;
+}
+
+.image-zoom-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.84);
+}
+
+.image-zoom-shell{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+
+.image-zoom-target{
+  max-width:100%;
+  max-height:100%;
+  border-radius:14px;
+  box-shadow:0 24px 80px rgba(0,0,0,.38);
+  cursor:zoom-out;
+}
+
+.image-zoom-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+}
