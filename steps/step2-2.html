@@ -36,7 +36,7 @@
 
     <!-- 오른쪽 -->
     <div style="min-width:0;">
-      <div class="manual-viewer" style="position:relative; width:100%; height:620px; background:#f1f5f9; border-radius:16px; overflow:hidden; border:1px solid #d1d5db;">
+      <div class="manual-viewer" data-current-manual-step="1" style="position:relative; width:100%; height:620px; background:#f1f5f9; border-radius:16px; overflow:hidden; border:1px solid #d1d5db;">
         <button type="button" class="manual-side-btn manual-side-prev" data-manual-prev aria-label="이전">‹</button>
         <button type="button" class="manual-side-btn manual-side-next" data-manual-next aria-label="다음">›</button>
 
@@ -154,7 +154,8 @@
                           스토어에 톡톡상담하기 버튼을 노출하실 수 있어요.<br>
                           <div style="margin-top:10px; display:flex; align-items:center; gap:10px;">
                             <span class="s3-badge-green">스마트스토어</span>
-                            <span style="color:#fa5252; font-size:10px;">●</span> <span style="font-size:12px; color:#666;">버튼 미노출</span>
+                            <span style="color:#fa5252; font-size:10px;">●</span>
+                            <span style="font-size:12px; color:#666;">버튼 미노출</span>
                             <button class="s3-btn-small">버튼 노출</button>
                           </div>
                         </div>
@@ -252,7 +253,9 @@
 
                     <div class="s3-table-row">
                       <div class="s3-col-check"><input type="checkbox" disabled></div>
-                      <div class="s3-col-name">위킵</div><div class="s3-col-status">-</div><div class="s3-col-prog">가능</div>
+                      <div class="s3-col-name">위킵</div>
+                      <div class="s3-col-status">-</div>
+                      <div class="s3-col-prog">가능</div>
                     </div>
 
                     <div class="s3-table-row s3-row-active">
@@ -260,19 +263,25 @@
                       <div class="s3-col-name" style="font-weight:bold;">
                         품고
                         <span class="s3-click-target" style="margin-left:10px;">
-                          <span class="s3-click-badge">선택됨!</span>
+                          <span class="s3-click-badge">선택!</span>
                         </span>
                       </div>
-                      <div class="s3-col-status">-</div><div class="s3-col-prog">가능</div>
+                      <div class="s3-col-status">-</div>
+                      <div class="s3-col-prog">가능</div>
                     </div>
 
                     <div class="s3-table-row">
                       <div class="s3-col-check"><input type="checkbox" disabled></div>
-                      <div class="s3-col-name">아워박스</div><div class="s3-col-status">-</div><div class="s3-col-prog">가능</div>
+                      <div class="s3-col-name">아워박스</div>
+                      <div class="s3-col-status">-</div>
+                      <div class="s3-col-prog">가능</div>
                     </div>
+
                     <div class="s3-table-row">
                       <div class="s3-col-check"><input type="checkbox" disabled></div>
-                      <div class="s3-col-name">파스토(FASSTO)</div><div class="s3-col-status">-</div><div class="s3-col-prog">가능</div>
+                      <div class="s3-col-name">파스토(FASSTO)</div>
+                      <div class="s3-col-status">-</div>
+                      <div class="s3-col-prog">가능</div>
                     </div>
                   </div>
                 </div>
@@ -282,7 +291,7 @@
                   <button class="s3-btn-confirm">
                     확인
                     <span class="s3-click-target">
-                      <span class="s3-click-badge" style="background:#0040d1;">클릭</span>
+                      <span class="s3-click-badge">클릭</span>
                     </span>
                   </button>
                 </div>
@@ -332,7 +341,7 @@
                   <button class="s3-btn-confirm">
                     확인
                     <span class="s3-click-target">
-                      <span class="s3-click-badge" style="background:#0040d1;">클릭</span>
+                      <span class="s3-click-badge">클릭</span>
                     </span>
                   </button>
                 </div>
@@ -343,6 +352,8 @@
 
       </div>
     </div>
+
+  </div>
 
   <style>
     .poomgo-step1-wrap .manual-side-btn{
@@ -418,7 +429,6 @@
       transform-origin:center center;
     }
 
-    /* image1 */
     .poomgo-step1-wrap .s3-smartstore-root{
       display:flex;
       flex-direction:column;
@@ -675,7 +685,6 @@
       flex-shrink:0;
     }
 
-    /* image2, image3 */
     .poomgo-step1-wrap .s3-modal-overlay{
       width:1000px;
       height:720px;
